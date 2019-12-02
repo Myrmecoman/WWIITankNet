@@ -24,7 +24,6 @@ public class Projectile : MonoBehaviour
             Debug.Log("hit player");
             Instantiate(dSphere, transform.position, Quaternion.identity); // instantiate a sphere at collision for debug
             Instantiate(particleVehicle, transform.position, Quaternion.identity);
-            coll.transform.root.GetComponent<VehicleController>().HitVehicle(damage);
         }
         if (coll.collider.CompareTag("Terrainus"))
         {
