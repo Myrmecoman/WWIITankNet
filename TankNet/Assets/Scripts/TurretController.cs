@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class TurretController : MonoBehaviourPun, IPunObservable
 {
-    public Text lmaoText;
     public int lifePoints = 2;
     public float sensivity = 1.5f;
     public float depression;
@@ -18,7 +17,6 @@ public class TurretController : MonoBehaviourPun, IPunObservable
     public Camera Commandercam;
     public Camera GunnerCam;
     public Transform MainCam;
-    public SpriteRenderer reticle;
 
     private bool justShot; // say if the tank shot
     private float fovGunner; // used to zoom the gun camera
@@ -53,7 +51,7 @@ public class TurretController : MonoBehaviourPun, IPunObservable
         {
             Cursor.visible = false;
             anim = gun.GetComponent<Animator>();
-            timeVar = 8.5f;
+            timeVar = 4;
             fovGunner = 18;
             fovLevel = 0;
             Commandercam.GetComponent<Camera>().enabled = true;
@@ -80,14 +78,11 @@ public class TurretController : MonoBehaviourPun, IPunObservable
                 if (vehicle.transform.position.y < -1)
                 {
                     drownCounter = drownCounter - Time.deltaTime;
-                    lmaoText.text = "You will drown in " + drownCounter.ToString("0");
                     if (drownCounter < 0)
                         Die();
                 }
                 else
                 {
-                    if (lmaoText.text != "")
-                        lmaoText.text = "";
                     if (drownCounter < 10)
                         drownCounter = 10;
                 }
@@ -112,11 +107,11 @@ public class TurretController : MonoBehaviourPun, IPunObservable
                 gun.transform.localEulerAngles = new Vector3(newX, 0, 0);
 
                 // countdown to reload
-                if (timeVar < 8.5f)
+                if (timeVar < 4)
                     timeVar = timeVar + Time.deltaTime;
 
                 // do the necessary things after shooting
-                if (Input.GetKeyDown("mouse 0") && timeVar >= 8.5f)
+                if (Input.GetKeyDown("mouse 0") && timeVar >= 4)
                 {
                     timeVar = 0;
                     justShot = true;
@@ -140,7 +135,6 @@ public class TurretController : MonoBehaviourPun, IPunObservable
                 if (Input.GetAxis("Mouse ScrollWheel") > 0 && Commandercam.GetComponent<Camera>().enabled)
                 {
                     Commandercam.GetComponent<Camera>().enabled = false;
-                    reticle.GetComponent<SpriteRenderer>().enabled = true;
                     GunnerCam.GetComponent<Camera>().enabled = true;
                     fovLevel = 1;
                 }
@@ -148,7 +142,6 @@ public class TurretController : MonoBehaviourPun, IPunObservable
                 // go to commander camera
                 if (Input.GetAxis("Mouse ScrollWheel") < 0 && GunnerCam.GetComponent<Camera>().enabled && fovLevel == 1)
                 {
-                    reticle.GetComponent<SpriteRenderer>().enabled = false;
                     Commandercam.GetComponent<Camera>().enabled = true;
                     GunnerCam.GetComponent<Camera>().enabled = false;
                     fovLevel = 0;
@@ -169,12 +162,6 @@ public class TurretController : MonoBehaviourPun, IPunObservable
                 if (destroyTime > 6)
                     Destroy(gameObject, 0);
             }
-        }
-        else
-        {
-            //Update remote player (smooth this, this looks good, at the cost of some accuracy)
-            transform.position = Vector3.Lerp(transform.position, latestPos, Time.deltaTime * 50);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, latestRot, Time.deltaTime * 50);
         }
     }
     
@@ -208,9 +195,6 @@ public class TurretController : MonoBehaviourPun, IPunObservable
     private void Die()
     {
         if (photonView.IsMine)
-        {
-            lmaoText.text = "Vehicle destroyed";
             isDestroyed = true;
-        }
     }
 }

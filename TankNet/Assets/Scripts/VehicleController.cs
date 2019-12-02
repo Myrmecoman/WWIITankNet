@@ -16,6 +16,7 @@ public class VehicleController : MonoBehaviourPun, IPunObservable
     private float m_steeringAngle;
     private Rigidbody rb;
     private float s;
+    private bool destroyed = false;
     
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -47,34 +48,24 @@ public class VehicleController : MonoBehaviourPun, IPunObservable
     {
         if (photonView.IsMine)
         {
-            if (true /*not destroyed*/)
-            {
-                 // manage the movements of the tank
-                GetInput();
-                Steer();
-                UpdateWheelPoses();
-                if (Input.GetKey("space"))
-                {
-                    frontleft.brakeTorque = 500;
-                    frontright.brakeTorque = 500;
-                    rearleft.brakeTorque = 500;
-                    rearright.brakeTorque = 500;
-                }
-                else
-                {
-                    frontleft.brakeTorque = 0;
-                    frontright.brakeTorque = 0;
-                    rearleft.brakeTorque = 0;
-                    rearright.brakeTorque = 0;
-                    Accelerate();
-                }
-            }
-            else
+            // manage the movements of the tank
+            GetInput();
+            Steer();
+            UpdateWheelPoses();
+            if (Input.GetKey("space") || destroyed)
             {
                 frontleft.brakeTorque = 500;
                 frontright.brakeTorque = 500;
                 rearleft.brakeTorque = 500;
                 rearright.brakeTorque = 500;
+            }
+            else
+            {
+                frontleft.brakeTorque = 0;
+                frontright.brakeTorque = 0;
+                rearleft.brakeTorque = 0;
+                rearright.brakeTorque = 0;
+                Accelerate();
             }
         }
     }
