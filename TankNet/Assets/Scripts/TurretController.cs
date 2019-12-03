@@ -16,7 +16,6 @@ public class TurretController : MonoBehaviourPun, IPunObservable
     public Transform turret;
     public Camera Commandercam;
     public Camera GunnerCam;
-    public Transform MainCam;
 
     private bool justShot; // say if the tank shot
     private float fovGunner; // used to zoom the gun camera
@@ -88,23 +87,15 @@ public class TurretController : MonoBehaviourPun, IPunObservable
                 }
 
                 // make the target look at the cursor
-                float X = MainCam.localEulerAngles.x - Input.GetAxis("Mouse Y") * sensivity;
-                float Y = MainCam.localEulerAngles.y + Input.GetAxis("Mouse X") * sensivity;
-                MainCam.localEulerAngles = new Vector3(X, Y, 0);
+                float X = Commandercam.transform.localEulerAngles.x - Input.GetAxis("Mouse Y") * sensivity;
+                float Y = Commandercam.transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensivity;
+                Commandercam.transform.localEulerAngles = new Vector3(X, Y, 0);
 
                 // turn the turret towards the target
-                turret.LookAt(new Vector3(target.transform.position.x, target.transform.position.y, target.transform.position.z));
-                float newY = turret.localEulerAngles.y;
-                turret.localEulerAngles = new Vector3(0, newY, 0);
+                //todo
 
                 // turn the gun towards the target and determine if we shot
-                gun.transform.LookAt(new Vector3(target.transform.position.x, target.transform.position.y, target.transform.position.z));
-                float newX = gun.transform.localEulerAngles.x;
-                if (newX > depression && newX < 180)
-                    newX = depression;
-                if (newX < 360 - elevation && newX >= 180)
-                    newX = 360 - elevation;
-                gun.transform.localEulerAngles = new Vector3(newX, 0, 0);
+                //todo
 
                 // countdown to reload
                 if (timeVar < 4)
@@ -117,13 +108,9 @@ public class TurretController : MonoBehaviourPun, IPunObservable
                     justShot = true;
                 }
 
-                // set the cameras to follow the target
-                Commandercam.transform.LookAt(target);
-                GunnerCam.transform.rotation = gun.transform.rotation;
-
 
                 // zoom in
-                if (Input.GetAxis("Mouse ScrollWheel") > 0 && GunnerCam.GetComponent<Camera>().enabled && fovLevel < 4)
+                if (Input.GetAxis("Mouse ScrollWheel") > 0 && GunnerCam.GetComponent<Camera>().enabled && fovLevel < 2)
                 {
                     GunnerCam.fieldOfView = fovGunner / 2;
                     fovGunner = fovGunner / 2;
@@ -172,7 +159,7 @@ public class TurretController : MonoBehaviourPun, IPunObservable
         if (justShot)
         {
             anim.Play("shoot");
-            throwIt = PhotonNetwork.Instantiate("Projectile", new Vector3(gun.transform.position.x, gun.transform.position.y, gun.transform.position.z + 3.5f), Quaternion.Euler(MainCam.transform.localEulerAngles.x - 90, MainCam.transform.localEulerAngles.y, MainCam.transform.localEulerAngles.z));
+            throwIt = PhotonNetwork.Instantiate("Projectile", new Vector3(gun.transform.position.x, gun.transform.position.y, gun.transform.position.z + 3.5f), gun.transform.rotation);
             throwIt.GetComponent<Rigidbody>().AddForce(gun.transform.forward * 25000, ForceMode.Impulse);
             double radturretY = turret.localEulerAngles.y * 0.0174533;
             vehicleRIGI.AddForce(new Vector3((float)System.Math.Sin(radturretY) * -480000, 0, (float)System.Math.Cos(radturretY) * -480000));
