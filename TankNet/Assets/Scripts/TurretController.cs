@@ -87,13 +87,18 @@ public class TurretController : MonoBehaviourPun, IPunObservable
                         drownCounter = 10;
                 }
 
-                // make the target look at the cursor
-                float X = targetparent.localEulerAngles.x - Input.GetAxis("Mouse Y") * sensivity;
+                // cam transforms
+                float X = Commandercam.transform.localEulerAngles.x - Input.GetAxis("Mouse Y") * sensivity;
                 float Y = targetparent.localEulerAngles.y + Input.GetAxis("Mouse X") * sensivity;
-                targetparent.localEulerAngles = new Vector3(X, Y, 0);
+                targetparent.localEulerAngles = new Vector3(0, Y, 0);
                 Commandercam.transform.rotation = targetparent.rotation;
+                Commandercam.transform.localEulerAngles = new Vector3(X, Commandercam.transform.localEulerAngles.y, Commandercam.transform.localEulerAngles.z);
 
-                turret.rotation = Quaternion.RotateTowards(turret.rotation, targetparent.transform.rotation, 20 * Time.smoothDeltaTime);
+                // turret rotation
+                turret.rotation = Quaternion.RotateTowards(turret.rotation, targetparent.transform.rotation, 22 * Time.smoothDeltaTime);
+
+                //gun rotation
+                gun.transform.localEulerAngles = Vector3.RotateTowards(gun.transform.localEulerAngles, new Vector3(Commandercam.transform.localEulerAngles.x, 0, 0), 0, 18 * Time.smoothDeltaTime);
 
                 // countdown to reload
                 if (timeVar < 4)
