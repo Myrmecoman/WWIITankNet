@@ -40,7 +40,7 @@ public class VehicleController : MonoBehaviourPun, IPunObservable
     private void Update()
     {
         s = rb.velocity.magnitude;
-        Debug.Log("speed is " + s);
+        //Debug.Log("speed is " + s);
     }
 
 

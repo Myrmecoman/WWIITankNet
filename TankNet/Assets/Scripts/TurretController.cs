@@ -97,15 +97,11 @@ public class TurretController : MonoBehaviourPun, IPunObservable
                 RotateToTur(target, 22);
 
                 // gun rotation
-                Debug.Log(gun.transform.localEulerAngles.x);
-                if (gun.transform.localEulerAngles.x < 354.5f && gun.transform.localEulerAngles.x > 180)
-                    gun.transform.localEulerAngles = new Vector3(354.5f, 0, 0);
-                else
-                {
-                    Quaternion cons = gun.transform.rotation;
-                    gun.transform.localEulerAngles = new Vector3(-Commandercam.transform.localEulerAngles.x, 0, 0);
-                    gun.transform.rotation = Quaternion.RotateTowards(cons, gun.transform.rotation, 22 * Time.smoothDeltaTime);
-                }
+                Quaternion cons = gun.transform.rotation;
+                gun.transform.localEulerAngles = new Vector3(-Commandercam.transform.localEulerAngles.x, 0, 0);
+                //gun.transform.localEulerAngles = new Vector3(gun.transform.localEulerAngles.x, 0, 0); clamp it damn
+                Debug.Log("--- " + gun.transform.localEulerAngles.x + " ---");
+                gun.transform.rotation = Quaternion.RotateTowards(cons, gun.transform.rotation, 22 * Time.smoothDeltaTime);
 
                 // countdown to reload
                 if (timeVar < 4)
