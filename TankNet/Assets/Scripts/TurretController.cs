@@ -11,6 +11,7 @@ public class TurretController : MonoBehaviourPun, IPunObservable
     public float depression;
     public float elevation;
     public GameObject gun;
+    public Transform targetparent;
     public Transform target; // this is a far object that the gun, turret and cameras constantly look at
     public GameObject vehicle;
     public Transform turret;
@@ -87,10 +88,13 @@ public class TurretController : MonoBehaviourPun, IPunObservable
                 }
 
                 // make the target look at the cursor
-                float X = Commandercam.transform.localEulerAngles.x - Input.GetAxis("Mouse Y") * sensivity;
-                float Y = Commandercam.transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensivity;
-                Commandercam.transform.localEulerAngles = new Vector3(X, Y, 0);
-                
+                float X = targetparent.localEulerAngles.x - Input.GetAxis("Mouse Y") * sensivity;
+                float Y = targetparent.localEulerAngles.y + Input.GetAxis("Mouse X") * sensivity;
+                targetparent.localEulerAngles = new Vector3(X, Y, 0);
+                Commandercam.transform.rotation = targetparent.rotation;
+
+                turret.rotation = Quaternion.RotateTowards(turret.rotation, targetparent.transform.rotation, 20 * Time.smoothDeltaTime);
+
                 // countdown to reload
                 if (timeVar < 4)
                     timeVar = timeVar + Time.deltaTime;
