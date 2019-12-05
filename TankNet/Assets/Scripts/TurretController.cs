@@ -88,17 +88,24 @@ public class TurretController : MonoBehaviourPun, IPunObservable
                 }
 
                 // cam transforms
-                float X = Commandercam.transform.localEulerAngles.x - Input.GetAxis("Mouse Y") * sensivity;
+                float X = targetparent.localEulerAngles.x - Input.GetAxis("Mouse Y") * sensivity;
                 float Y = targetparent.localEulerAngles.y + Input.GetAxis("Mouse X") * sensivity;
-                targetparent.localEulerAngles = new Vector3(0, Y, 0);
-                Commandercam.transform.rotation = targetparent.rotation;
-                Commandercam.transform.localEulerAngles = new Vector3(X, Commandercam.transform.localEulerAngles.y, Commandercam.transform.localEulerAngles.z);
+                targetparent.localEulerAngles = new Vector3(X, Y, 0);
+                Commandercam.transform.eulerAngles = new Vector3(targetparent.eulerAngles.x, targetparent.eulerAngles.y + 180, targetparent.eulerAngles.z);
 
                 // turret rotation
-                turret.rotation = Quaternion.RotateTowards(turret.rotation, targetparent.transform.rotation, 22 * Time.smoothDeltaTime);
+                RotateToTur(target, 22);
 
-                //gun rotation
-                //gun.transform.localEulerAngles = Vector3.RotateTowards(gun.transform.localEulerAngles, new Vector3(Commandercam.transform.localEulerAngles.x, 0, 0), 0, 18 * Time.smoothDeltaTime);
+                // gun rotation
+                Debug.Log(gun.transform.localEulerAngles.x);
+                if (gun.transform.localEulerAngles.x < 354.5f && gun.transform.localEulerAngles.x > 180)
+                    gun.transform.localEulerAngles = new Vector3(354.5f, 0, 0);
+                else
+                {
+                    Quaternion cons = gun.transform.rotation;
+                    gun.transform.localEulerAngles = new Vector3(-Commandercam.transform.localEulerAngles.x, 0, 0);
+                    gun.transform.rotation = Quaternion.RotateTowards(cons, gun.transform.rotation, 22 * Time.smoothDeltaTime);
+                }
 
                 // countdown to reload
                 if (timeVar < 4)
@@ -154,8 +161,17 @@ public class TurretController : MonoBehaviourPun, IPunObservable
             }
         }
     }
-    
 
+
+    void RotateToTur(Transform target, float rotationSpeed)
+    {
+        Vector3 dir = (target.position - turret.position).normalized;
+        Quaternion newRot = Quaternion.LookRotation(dir, turret.up);
+        turret.rotation = Quaternion.RotateTowards(turret.rotation, newRot, rotationSpeed * Time.smoothDeltaTime);
+        turret.localEulerAngles = new Vector3(0f, turret.localEulerAngles.y, 0f);
+    }
+
+    
     private void FixedUpdate()
     {
         // give recoil to the tank and throw projectile
