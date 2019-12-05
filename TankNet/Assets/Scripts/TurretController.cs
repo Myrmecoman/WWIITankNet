@@ -52,7 +52,7 @@ public class TurretController : MonoBehaviourPun, IPunObservable
             Cursor.visible = false;
             anim = gun.GetComponent<Animator>();
             timeVar = 4;
-            fovGunner = 18;
+            fovGunner = 25;
             fovLevel = 0;
             Commandercam.GetComponent<Camera>().enabled = true;
             GunnerCam.GetComponent<Camera>().enabled = false;
@@ -98,7 +98,7 @@ public class TurretController : MonoBehaviourPun, IPunObservable
                 turret.rotation = Quaternion.RotateTowards(turret.rotation, targetparent.transform.rotation, 22 * Time.smoothDeltaTime);
 
                 //gun rotation
-                gun.transform.localEulerAngles = Vector3.RotateTowards(gun.transform.localEulerAngles, new Vector3(Commandercam.transform.localEulerAngles.x, 0, 0), 0, 18 * Time.smoothDeltaTime);
+                //gun.transform.localEulerAngles = Vector3.RotateTowards(gun.transform.localEulerAngles, new Vector3(Commandercam.transform.localEulerAngles.x, 0, 0), 0, 18 * Time.smoothDeltaTime);
 
                 // countdown to reload
                 if (timeVar < 4)
