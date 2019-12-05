@@ -54,10 +54,10 @@ public class VehicleController : MonoBehaviourPun, IPunObservable
             UpdateWheelPoses();
             if (Input.GetKey("space") || destroyed)
             {
-                frontleft.brakeTorque = 500;
-                frontright.brakeTorque = 500;
-                rearleft.brakeTorque = 500;
-                rearright.brakeTorque = 500;
+                frontleft.brakeTorque = 5000;
+                frontright.brakeTorque = 5000;
+                rearleft.brakeTorque = 5000;
+                rearright.brakeTorque = 5000;
             }
             else
             {

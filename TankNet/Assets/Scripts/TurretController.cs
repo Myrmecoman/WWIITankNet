@@ -90,13 +90,7 @@ public class TurretController : MonoBehaviourPun, IPunObservable
                 float X = Commandercam.transform.localEulerAngles.x - Input.GetAxis("Mouse Y") * sensivity;
                 float Y = Commandercam.transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensivity;
                 Commandercam.transform.localEulerAngles = new Vector3(X, Y, 0);
-
-                // turn the turret towards the target
-                //todo
-
-                // turn the gun towards the target and determine if we shot
-                //todo
-
+                
                 // countdown to reload
                 if (timeVar < 4)
                     timeVar = timeVar + Time.deltaTime;
