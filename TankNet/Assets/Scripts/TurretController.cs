@@ -99,8 +99,12 @@ public class TurretController : MonoBehaviourPun, IPunObservable
                 // gun rotation
                 Quaternion cons = gun.transform.rotation;
                 gun.transform.localEulerAngles = new Vector3(-Commandercam.transform.localEulerAngles.x, 0, 0);
-                //gun.transform.localEulerAngles = new Vector3(gun.transform.localEulerAngles.x, 0, 0); clamp it damn
-                Debug.Log("--- " + gun.transform.localEulerAngles.x + " ---");
+                float newX;
+                if (gun.transform.localEulerAngles.x >= 0 && gun.transform.localEulerAngles.x < 180)
+                    newX = Mathf.Clamp(gun.transform.localEulerAngles.x, 0, 89);
+                else
+                    newX = Mathf.Clamp(gun.transform.localEulerAngles.x, 354.5f, 360);
+                gun.transform.localEulerAngles = new Vector3(newX, 0, 0);
                 gun.transform.rotation = Quaternion.RotateTowards(cons, gun.transform.rotation, 22 * Time.smoothDeltaTime);
 
                 // countdown to reload
