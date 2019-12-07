@@ -91,7 +91,7 @@ public class TurretController : MonoBehaviourPun, IPunObservable
                 float X = targetparent.localEulerAngles.x - Input.GetAxis("Mouse Y") * sensivity;
                 float Y = targetparent.localEulerAngles.y + Input.GetAxis("Mouse X") * sensivity;
                 targetparent.localEulerAngles = new Vector3(X, Y, 0);
-                Commandercam.transform.eulerAngles = new Vector3(targetparent.eulerAngles.x, targetparent.eulerAngles.y + 180, targetparent.eulerAngles.z);
+                Commandercam.transform.eulerAngles = new Vector3(targetparent.localEulerAngles.x, targetparent.eulerAngles.y + 180, targetparent.localEulerAngles.z);
 
                 // turret rotation
                 RotateToTur(target, 22);
