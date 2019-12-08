@@ -11,6 +11,7 @@ public class TurretController : MonoBehaviourPun, IPunObservable
     public float depression;
     public float elevation;
     public GameObject gun;
+    public Animator gunAnim;
     public Transform targetparent;
     public Transform target; // this is a far object that the gun, turret and cameras constantly look at
     public GameObject vehicle;
@@ -22,7 +23,6 @@ public class TurretController : MonoBehaviourPun, IPunObservable
     private float fovGunner; // used to zoom the gun camera
     private float fovLevel; // to know the zooming level
     private float timeVar; // to countdown after a shot
-    private Animator anim;
     private GameObject throwIt;
     private bool isDestroyed = false;
     private float destroyTime = 0;
@@ -50,7 +50,6 @@ public class TurretController : MonoBehaviourPun, IPunObservable
         if (photonView.IsMine)
         {
             Cursor.visible = false;
-            anim = gun.GetComponent<Animator>();
             timeVar = 4;
             fovGunner = 25;
             fovLevel = 0;
@@ -94,7 +93,7 @@ public class TurretController : MonoBehaviourPun, IPunObservable
                 Commandercam.transform.eulerAngles = new Vector3(targetparent.localEulerAngles.x, targetparent.eulerAngles.y + 180, targetparent.localEulerAngles.z);
 
                 // turret rotation
-                RotateToTur(target, 22);
+                RotateTurret(target, 22);
 
                 // gun rotation
                 Quaternion cons = gun.transform.rotation;
@@ -163,7 +162,7 @@ public class TurretController : MonoBehaviourPun, IPunObservable
     }
 
 
-    void RotateToTur(Transform target, float rotationSpeed)
+    void RotateTurret(Transform target, float rotationSpeed)
     {
         Vector3 dir = (target.position - turret.position).normalized;
         Quaternion newRot = Quaternion.LookRotation(dir, turret.up);
@@ -177,7 +176,7 @@ public class TurretController : MonoBehaviourPun, IPunObservable
         // give recoil to the tank and throw projectile
         if (justShot)
         {
-            anim.Play("shoot");
+            gunAnim.Play("shoot");
             throwIt = PhotonNetwork.Instantiate("Projectile", new Vector3(gun.transform.position.x, gun.transform.position.y, gun.transform.position.z + 3.5f), gun.transform.rotation);
             throwIt.GetComponent<Rigidbody>().AddForce(gun.transform.forward * 25000, ForceMode.Impulse);
             double radturretY = turret.localEulerAngles.y * 0.0174533;
