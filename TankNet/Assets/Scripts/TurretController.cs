@@ -19,10 +19,13 @@ public class TurretController : MonoBehaviourPun, IPunObservable
     public Camera Commandercam;
     public Camera GunnerCam;
 
-    private bool justShot; // say if the tank shot
+    private bool reload; // say if the tank shot
+    private float timeVar; // to countdown after a shot
+    private int mag;
+    private float timeMag;
+    private bool shot;
     private float fovGunner; // used to zoom the gun camera
     private float fovLevel; // to know the zooming level
-    private float timeVar; // to countdown after a shot
     private GameObject throwIt;
     private bool isDestroyed = false;
     private float destroyTime = 0;
@@ -50,12 +53,15 @@ public class TurretController : MonoBehaviourPun, IPunObservable
         if (photonView.IsMine)
         {
             Cursor.visible = false;
+            mag = 10;
+            timeMag = 0.19f;
             timeVar = 4;
             fovGunner = 25;
             fovLevel = 0;
+            shot = false;
             Commandercam.GetComponent<Camera>().enabled = true;
             GunnerCam.GetComponent<Camera>().enabled = false;
-            justShot = false;
+            reload = false;
             vehicleRIGI = vehicle.GetComponent<Rigidbody>();
         }
         else
@@ -105,19 +111,7 @@ public class TurretController : MonoBehaviourPun, IPunObservable
                     newX = Mathf.Clamp(gun.transform.localEulerAngles.x, 354.5f, 360);
                 gun.transform.localEulerAngles = new Vector3(newX, 0, 0);
                 gun.transform.rotation = Quaternion.RotateTowards(cons, gun.transform.rotation, 22 * Time.smoothDeltaTime);
-
-                // countdown to reload
-                if (timeVar < 4)
-                    timeVar = timeVar + Time.deltaTime;
-
-                // do the necessary things after shooting
-                if (Input.GetKeyDown("mouse 0") && timeVar >= 4)
-                {
-                    timeVar = 0;
-                    justShot = true;
-                }
-
-
+                
                 // zoom in
                 if (Input.GetAxis("Mouse ScrollWheel") > 0 && GunnerCam.GetComponent<Camera>().enabled && fovLevel < 2)
                 {
@@ -151,6 +145,30 @@ public class TurretController : MonoBehaviourPun, IPunObservable
                     fovLevel = fovLevel - 1;
                     sensivity = sensivity * 2;
                 }
+
+                // shooting system
+                if (timeVar < 4 && reload == true)
+                    timeVar += Time.deltaTime;
+                else if (reload == true)
+                    reload = false;
+
+                if (timeMag < 0.19f)
+                    timeMag += Time.deltaTime;
+                
+                if (Input.GetKey("mouse 0") && timeMag >= 0.19f && reload == false)
+                {
+                    if (mag == 0)
+                    {
+                        timeVar = 0;
+                        reload = true;
+                    }
+                    else
+                    {
+                        timeMag = 0;
+                        shot = true;
+                    }
+                    mag--;
+                }
             }
             else
             {
@@ -174,14 +192,14 @@ public class TurretController : MonoBehaviourPun, IPunObservable
     private void FixedUpdate()
     {
         // give recoil to the tank and throw projectile
-        if (justShot)
+        if (shot)
         {
             gunAnim.Play("shoot");
             //throwIt = PhotonNetwork.Instantiate("Projectile", new Vector3(gun.transform.position.x, gun.transform.position.y, gun.transform.position.z + 3.5f), gun.transform.rotation);
             //throwIt.GetComponent<Rigidbody>().AddForce(gun.transform.forward * 25000, ForceMode.Impulse);
             double radturretY = turret.localEulerAngles.y * 0.0174533;
-            vehicleRIGI.AddForce(new Vector3((float)System.Math.Sin(radturretY) * -480000, 0, (float)System.Math.Cos(radturretY) * -480000));
-            justShot = false;
+            vehicleRIGI.AddForce(new Vector3((float)System.Math.Sin(radturretY) * 500000, 0, (float)System.Math.Cos(radturretY) * 500000));
+            shot = false;
         }
     }
 
