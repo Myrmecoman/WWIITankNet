@@ -20,9 +20,9 @@ public class TurretController : MonoBehaviourPun, IPunObservable
     public Camera GunnerCam;
 
     private bool reload; // say if the tank shot
-    private float timeVar; // to countdown after a shot
-    private int mag;
-    private float timeMag;
+    private float ReloadTime; // to countdown after a shot
+    private int magNb;
+    private float timeBetweenShots;
     private bool shot;
     private float fovGunner; // used to zoom the gun camera
     private float fovLevel; // to know the zooming level
@@ -53,9 +53,9 @@ public class TurretController : MonoBehaviourPun, IPunObservable
         if (photonView.IsMine)
         {
             Cursor.visible = false;
-            mag = 10;
-            timeMag = 0.19f;
-            timeVar = 4;
+            magNb = 10;
+            timeBetweenShots = 0.2f;
+            ReloadTime = 4;
             fovGunner = 25;
             fovLevel = 0;
             shot = false;
@@ -147,27 +147,27 @@ public class TurretController : MonoBehaviourPun, IPunObservable
                 }
 
                 // shooting system
-                if (timeVar < 4 && reload == true)
-                    timeVar += Time.deltaTime;
+                if (ReloadTime < 0 && reload == true)
+                    ReloadTime -= Time.deltaTime;
                 else if (reload == true)
                     reload = false;
 
-                if (timeMag < 0.19f)
-                    timeMag += Time.deltaTime;
+                if (timeBetweenShots < 0.2f)
+                    timeBetweenShots += Time.deltaTime;
                 
-                if (Input.GetKey("mouse 0") && timeMag >= 0.19f && reload == false)
+                if (Input.GetKey("mouse 0") && timeBetweenShots >= 0.2f && reload == false)
                 {
-                    if (mag == 0)
+                    if (magNb == 0)
                     {
-                        timeVar = 0;
+                        ReloadTime = 4;
                         reload = true;
                     }
                     else
                     {
-                        timeMag = 0;
+                        timeBetweenShots = 0;
                         shot = true;
                     }
-                    mag--;
+                    magNb--;
                 }
             }
             else
