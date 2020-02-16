@@ -17,6 +17,7 @@ public class VehicleController : MonoBehaviourPun, IPunObservable
     private Rigidbody rb;
     private float s;
     private bool destroyed = false;
+    private float force;
     
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -35,14 +36,7 @@ public class VehicleController : MonoBehaviourPun, IPunObservable
         rb = GetComponent<Rigidbody>();
         rb.centerOfMass = new Vector3(rb.centerOfMass.x, rb.centerOfMass.y - 1, rb.centerOfMass.z);
     }
-
-
-    private void Update()
-    {
-        s = rb.velocity.magnitude;
-        //Debug.Log("speed is " + s);
-    }
-
+    
 
     private void FixedUpdate()
     {
@@ -85,10 +79,37 @@ public class VehicleController : MonoBehaviourPun, IPunObservable
     
     private void Accelerate()
     {
-        frontleft.motorTorque = m_verticalInput * motorForce;
-        frontright.motorTorque = m_verticalInput * motorForce;
-        rearleft.motorTorque = m_verticalInput * motorForce;
-        rearright.motorTorque = m_verticalInput * motorForce;
+        s = rb.velocity.magnitude;
+        Debug.Log("speed is " + s * 3.6f);
+        
+        if(s < 1.4f)
+        {
+            force = motorForce * 3;
+        }
+        else if(s < 4.2f)
+        {
+            force = motorForce * 2;
+        }
+        else if(s < 8.4f)
+        {
+            force = motorForce * 1.5f;
+        }
+        else if(s < 14f)
+        {
+            force = motorForce;
+        }
+        else if(s < 21f)
+        {
+            force = motorForce / 2;
+        }
+        else
+        {
+            force = motorForce * -0.5f;
+        }
+        frontleft.motorTorque = m_verticalInput * force;
+        frontright.motorTorque = m_verticalInput * force;
+        rearleft.motorTorque = m_verticalInput * force;
+        rearright.motorTorque = m_verticalInput * force;
     }
     
     private void UpdateWheelPoses()
