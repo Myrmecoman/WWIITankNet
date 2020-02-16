@@ -147,27 +147,26 @@ public class TurretController : MonoBehaviourPun, IPunObservable
                 }
 
                 // shooting system
-                if (ReloadTime < 0 && reload == true)
+                if (ReloadTime > 0 && reload == true)
                     ReloadTime -= Time.deltaTime;
                 else if (reload == true)
                     reload = false;
 
-                if (timeBetweenShots < 0.2f)
-                    timeBetweenShots += Time.deltaTime;
+                if (timeBetweenShots > 0)
+                    timeBetweenShots -= Time.deltaTime;
                 
-                if (Input.GetKey("mouse 0") && timeBetweenShots >= 0.2f && reload == false)
+                if (Input.GetKey("mouse 0") && timeBetweenShots <= 0 && !reload)
                 {
+                    magNb--;
+                    timeBetweenShots = 0.2f;
+                    shot = true;
                     if (magNb == 0)
                     {
+                        magNb = 10;
                         ReloadTime = 4;
                         reload = true;
+                        Debug.Log("Reloading");
                     }
-                    else
-                    {
-                        timeBetweenShots = 0;
-                        shot = true;
-                    }
-                    magNb--;
                 }
             }
             else
