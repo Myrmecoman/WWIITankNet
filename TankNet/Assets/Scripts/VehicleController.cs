@@ -83,29 +83,16 @@ public class VehicleController : MonoBehaviourPun, IPunObservable
         Debug.Log("speed is " + s * 3.6f);
         
         if(s < 1.4f)
-        {
             force = motorForce * 3;
-        }
         else if(s < 4.2f)
-        {
             force = motorForce * 2;
-        }
         else if(s < 8.4f)
-        {
-            force = motorForce * 1.5f;
-        }
-        else if(s < 14f)
-        {
             force = motorForce;
-        }
-        else if(s < 21f)
-        {
-            force = motorForce / 2;
-        }
+        else if(s < 17f)
+            force = motorForce * 0.5f;
         else
-        {
-            force = motorForce * -0.5f;
-        }
+            force = motorForce * -2;
+
         frontleft.motorTorque = m_verticalInput * force;
         frontright.motorTorque = m_verticalInput * force;
         rearleft.motorTorque = m_verticalInput * force;
