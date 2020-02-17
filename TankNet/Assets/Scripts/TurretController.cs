@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Photon.Pun;
-using UnityEngine.UI;
 
 public class TurretController : MonoBehaviourPun, IPunObservable
 {
@@ -196,8 +193,6 @@ public class TurretController : MonoBehaviourPun, IPunObservable
             gunAnim.Play("shoot");
             throwIt = PhotonNetwork.Instantiate("Projectile", new Vector3(gun.transform.position.x, gun.transform.position.y, gun.transform.position.z + 3.5f), gun.transform.rotation);
             throwIt.GetComponent<Rigidbody>().AddForce(gun.transform.forward * 25000, ForceMode.Impulse);
-            double radturretY = turret.localEulerAngles.y * 0.0174533;
-            vehicleRIGI.AddForce(new Vector3((float)System.Math.Sin(radturretY) * 500000, 0, (float)System.Math.Cos(radturretY) * 500000));
             shot = false;
         }
     }

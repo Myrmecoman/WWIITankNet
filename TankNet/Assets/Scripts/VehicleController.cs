@@ -42,11 +42,14 @@ public class VehicleController : MonoBehaviourPun, IPunObservable
     {
         if (photonView.IsMine)
         {
+            s = rb.velocity.magnitude;
+            Debug.Log("speed is " + s * 3.6f);
+            
             // manage the movements of the tank
             GetInput();
             Steer();
             UpdateWheelPoses();
-            if (Input.GetKey("space") || destroyed)
+            if (Input.GetKey("space") || destroyed || s >= 16)
             {
                 frontleft.brakeTorque = 5000;
                 frontright.brakeTorque = 5000;
@@ -59,7 +62,7 @@ public class VehicleController : MonoBehaviourPun, IPunObservable
                 frontright.brakeTorque = 0;
                 rearleft.brakeTorque = 0;
                 rearright.brakeTorque = 0;
-                Accelerate();
+                Accelerate(s);
             }
         }
     }
@@ -77,21 +80,18 @@ public class VehicleController : MonoBehaviourPun, IPunObservable
         frontright.steerAngle = m_steeringAngle;
     }
     
-    private void Accelerate()
+    private void Accelerate(float s)
     {
-        s = rb.velocity.magnitude;
-        Debug.Log("speed is " + s * 3.6f);
-        
-        if(s < 1.4f)
+        if (s < 1.4f)
             force = motorForce * 3;
-        else if(s < 4.2f)
+        else if (s < 4.2f)
             force = motorForce * 2;
-        else if(s < 8.4f)
+        else if (s < 8.4f)
             force = motorForce;
-        else if(s < 17f)
+        else if (s < 16)
             force = motorForce * 0.5f;
         else
-            force = motorForce * -2;
+            force = 0;
 
         frontleft.motorTorque = m_verticalInput * force;
         frontright.motorTorque = m_verticalInput * force;
