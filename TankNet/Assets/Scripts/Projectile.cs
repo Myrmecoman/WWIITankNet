@@ -13,7 +13,7 @@ public class Projectile : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Destroy(gameObject, 8f);
+        Destroy(gameObject, 8);
     }
 
 

@@ -192,7 +192,7 @@ public class TurretController : MonoBehaviourPun, IPunObservable
         {
             gunAnim.Play("shoot");
             throwIt = PhotonNetwork.Instantiate("Projectile", new Vector3(gun.transform.position.x, gun.transform.position.y, gun.transform.position.z + 3.5f), gun.transform.rotation);
-            throwIt.GetComponent<Rigidbody>().AddForce(gun.transform.forward * 25000, ForceMode.Impulse);
+            throwIt.GetComponent<Rigidbody>().AddForce(gun.transform.forward * -25000, ForceMode.Impulse);
             shot = false;
         }
     }

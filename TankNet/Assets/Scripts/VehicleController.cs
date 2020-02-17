@@ -43,7 +43,7 @@ public class VehicleController : MonoBehaviourPun, IPunObservable
         if (photonView.IsMine)
         {
             s = rb.velocity.magnitude;
-            Debug.Log("speed is " + s * 3.6f);
+            //Debug.Log("speed is " + s * 3.6f);
             
             // manage the movements of the tank
             GetInput();
