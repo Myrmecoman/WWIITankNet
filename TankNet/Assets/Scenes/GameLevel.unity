@@ -520,13 +520,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.7912401, y: 0.14845252, z: -0.21201217, w: 0.55403227}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 110, y: 30, z: 0}
 --- !u!1 &1393765992
 GameObject:
   m_ObjectHideFlags: 0
@@ -539,7 +539,7 @@ GameObject:
   - component: {fileID: 1393765994}
   - component: {fileID: 1393765993}
   m_Layer: 0
-  m_Name: Terrain (1)
+  m_Name: TerrainTest
   m_TagString: Terrainus
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
