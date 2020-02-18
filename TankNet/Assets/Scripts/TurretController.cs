@@ -17,6 +17,7 @@ public class TurretController : MonoBehaviourPun
     public Camera GunnerCam;
     public Transform ShellFireTrans;
     public GameObject Shell;
+    public AudioListener MainAudioListen;
 
     private bool reload; // say if the tank shot
     private float ReloadTime; // to countdown after a shot
@@ -53,6 +54,7 @@ public class TurretController : MonoBehaviourPun
         }
         else
         {
+            MainAudioListen.enabled = false;
             Commandercam.enabled = false;
             GunnerCam.enabled = false;
         }
@@ -160,7 +162,7 @@ public class TurretController : MonoBehaviourPun
             {
                 destroyTime = destroyTime + Time.deltaTime;
                 if (destroyTime > 6)
-                    Destroy(gameObject, 0);
+                    PhotonNetwork.Destroy(photonView);
             }
         }
     }
@@ -213,6 +215,9 @@ public class TurretController : MonoBehaviourPun
     void Die()
     {
         if (photonView.IsMine)
+        {
             isDestroyed = true;
+            GetComponent<VehicleController>().enabled = false;
+        }
     }
 }

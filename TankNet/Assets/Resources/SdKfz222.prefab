@@ -658,6 +658,7 @@ MonoBehaviour:
   GunnerCam: {fileID: 2693301954242176300}
   ShellFireTrans: {fileID: 4359579575939230999}
   Shell: {fileID: 8077318481018330977, guid: fe3e7c8dfec1ffc4cacdbc529c9edef6, type: 3}
+  MainAudioListen: {fileID: 795160477615947096}
 --- !u!1 &3216454343774365142
 GameObject:
   m_ObjectHideFlags: 0
