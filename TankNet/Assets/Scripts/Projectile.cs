@@ -21,13 +21,11 @@ public class Projectile : MonoBehaviour
     {
         if (coll.collider.CompareTag("Player"))
         {
-            Debug.Log("hit player");
             Instantiate(dSphere, transform.position, Quaternion.identity); // instantiate a sphere at collision for debug
             Instantiate(particleVehicle, transform.position, Quaternion.identity);
         }
         if (coll.collider.CompareTag("Terrainus"))
         {
-            Debug.Log("hit terrain");
             Instantiate(dSphere, transform.position, Quaternion.identity); // instantiate a sphere at collision for debug
             Instantiate(particleTerrain, transform.position, Quaternion.identity);
         }

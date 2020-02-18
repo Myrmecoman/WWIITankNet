@@ -16,6 +16,7 @@ public class TurretController : MonoBehaviourPun
     public Camera Commandercam;
     public Camera GunnerCam;
     public Transform ShellFireTrans;
+    public GameObject Shell;
 
     private bool reload; // say if the tank shot
     private float ReloadTime; // to countdown after a shot
@@ -24,7 +25,6 @@ public class TurretController : MonoBehaviourPun
     private bool shot;
     private float fovGunner; // used to zoom the gun camera
     private float fovLevel; // to know the zooming level
-    private GameObject throwIt;
     private bool isDestroyed = false;
     private float destroyTime = 0;
     private Rigidbody vehicleRIGI;
@@ -175,7 +175,7 @@ public class TurretController : MonoBehaviourPun
     }
 
     
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         if (photonView.IsMine)
         {
@@ -183,26 +183,34 @@ public class TurretController : MonoBehaviourPun
             if (shot)
             {
                 gunAnim.Play("shoot");
-                throwIt = PhotonNetwork.Instantiate("Projectile", ShellFireTrans.position, ShellFireTrans.rotation);
-                throwIt.GetComponent<Rigidbody>().AddForce(ShellFireTrans.forward * -25000, ForceMode.Impulse);
+                photonView.RPC("Shooting", RpcTarget.All, ShellFireTrans.position);
                 shot = false;
             }
         }
     }
 
 
-    public void HitVehicle(int damage)
+    [PunRPC]
+    void Shooting(Vector3 pos)
     {
-        if (photonView.IsMine)
+        GameObject throwIt = Instantiate(Shell, pos, Quaternion.identity);
+        throwIt.GetComponent<Rigidbody>().AddForce(ShellFireTrans.forward * -25000, ForceMode.Impulse);
+    }
+
+
+    void OnCollisionEnter(Collision coll)
+    {
+        if (photonView.IsMine && coll.gameObject.tag == "Shell")
         {
-            lifePoints = lifePoints - damage;
+            Debug.Log("Vehicle with view " + photonView.GetInstanceID() + " was hit");
+            lifePoints = lifePoints - 1;
             if (lifePoints <= 0)
                 Die();
         }
     }
 
 
-    private void Die()
+    void Die()
     {
         if (photonView.IsMine)
             isDestroyed = true;
