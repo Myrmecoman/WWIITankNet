@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using UnityEngine;
-using Photon.Pun;
+﻿using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public int damage = 1;
     public GameObject particleTerrain;
     public GameObject particleVehicle;
     public GameObject dSphere;
@@ -19,14 +16,14 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision coll)
     {
-        if (coll.collider.CompareTag("Player"))
+        if (coll.gameObject.tag == "Player")
         {
             Instantiate(dSphere, transform.position, Quaternion.identity); // instantiate a sphere at collision for debug
             Instantiate(particleVehicle, transform.position, Quaternion.identity);
         }
-        if (coll.collider.CompareTag("Terrainus"))
+        if (coll.gameObject.tag == "Terrainus")
         {
-            Instantiate(dSphere, transform.position, Quaternion.identity); // instantiate a sphere at collision for debug
+            //Instantiate(dSphere, transform.position, Quaternion.identity); // instantiate a sphere at collision for debug
             Instantiate(particleTerrain, transform.position, Quaternion.identity);
         }
         gameObject.GetComponent<Collider>().enabled = false;

@@ -311,7 +311,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4246532572451087828}
   - component: {fileID: 2693301954242176300}
-  - component: {fileID: 6325673709945888677}
   - component: {fileID: 8388609445079386096}
   m_Layer: 0
   m_Name: CamGun
@@ -377,14 +376,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &6325673709945888677
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3100649803875797087}
-  m_Enabled: 0
 --- !u!114 &8388609445079386096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -462,6 +453,7 @@ GameObject:
   - component: {fileID: 4142461027975722108}
   - component: {fileID: 8286110192090363423}
   - component: {fileID: 2042357736679103970}
+  - component: {fileID: 6468843790336009931}
   m_Layer: 0
   m_Name: SdKfz222
   m_TagString: Player
@@ -594,6 +586,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 4142461027975722108}
+  - {fileID: 6468843790336009931}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -659,6 +652,22 @@ MonoBehaviour:
   ShellFireTrans: {fileID: 4359579575939230999}
   Shell: {fileID: 8077318481018330977, guid: fe3e7c8dfec1ffc4cacdbc529c9edef6, type: 3}
   MainAudioListen: {fileID: 795160477615947096}
+--- !u!114 &6468843790336009931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3168798889499754435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &3216454343774365142
 GameObject:
   m_ObjectHideFlags: 0
