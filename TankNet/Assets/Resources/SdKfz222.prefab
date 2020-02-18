@@ -152,7 +152,7 @@ Transform:
   m_LocalScale: {x: 0.27739254, y: 0.2773922, z: 0.2773922}
   m_Children: []
   m_Father: {fileID: 1158987705820474634}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &7968211930727270040
 MeshFilter:
@@ -458,9 +458,9 @@ GameObject:
   - component: {fileID: 1515576064465648243}
   - component: {fileID: 4767641320206317270}
   - component: {fileID: 3119564127971392448}
-  - component: {fileID: 8286110192090363423}
   - component: {fileID: 8906483000292093217}
   - component: {fileID: 4142461027975722108}
+  - component: {fileID: 8286110192090363423}
   - component: {fileID: 2042357736679103970}
   m_Layer: 0
   m_Name: SdKfz222
@@ -575,28 +575,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &8286110192090363423
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3168798889499754435}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6915217b7a8d7ff49a68f96f64dc380b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  frontleft: {fileID: 804189757557434205}
-  frontright: {fileID: 464666796998370133}
-  rearleft: {fileID: 21816500361746772}
-  rearright: {fileID: 1551578228545412741}
-  frontleftT: {fileID: 9078388448288926445}
-  frontrightT: {fileID: 9016220791482889352}
-  rearleftT: {fileID: 523262141146709356}
-  rearrightT: {fileID: 2371661374400627595}
-  maxSteerAngle: 25
-  motorForce: 800
 --- !u!114 &8906483000292093217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -632,6 +610,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SmoothingDelay: 5
+--- !u!114 &8286110192090363423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3168798889499754435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6915217b7a8d7ff49a68f96f64dc380b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frontleft: {fileID: 804189757557434205}
+  frontright: {fileID: 464666796998370133}
+  rearleft: {fileID: 21816500361746772}
+  rearright: {fileID: 1551578228545412741}
+  frontleftT: {fileID: 9078388448288926445}
+  frontrightT: {fileID: 9016220791482889352}
+  rearleftT: {fileID: 523262141146709356}
+  rearrightT: {fileID: 2371661374400627595}
+  maxSteerAngle: 25
+  motorForce: 800
 --- !u!114 &2042357736679103970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -656,6 +656,7 @@ MonoBehaviour:
   turret: {fileID: 1127717731763693750}
   Commandercam: {fileID: 7069657855161317430}
   GunnerCam: {fileID: 2693301954242176300}
+  ShellFireTrans: {fileID: 4359579575939230999}
 --- !u!1 &3216454343774365142
 GameObject:
   m_ObjectHideFlags: 0
@@ -1242,6 +1243,7 @@ Transform:
   m_LocalPosition: {x: -0.38100493, y: -0.22128803, z: -1.9500942}
   m_LocalScale: {x: 3.605, y: 3.6050057, z: 3.6050057}
   m_Children:
+  - {fileID: 4359579575939230999}
   - {fileID: 165743579683213334}
   m_Father: {fileID: 9028037160284716091}
   m_RootOrder: 1
@@ -1292,6 +1294,36 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &7006939292394363369
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4359579575939230999}
+  m_Layer: 0
+  m_Name: ShellFireTrans
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4359579575939230999
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7006939292394363369}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: -1}
+  m_LocalPosition: {x: 0.1057, y: 0.0636, z: 0.017}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1158987705820474634}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7742800467121379149
 GameObject:
   m_ObjectHideFlags: 0

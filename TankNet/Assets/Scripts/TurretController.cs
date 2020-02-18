@@ -15,6 +15,7 @@ public class TurretController : MonoBehaviourPun
     public Transform turret;
     public Camera Commandercam;
     public Camera GunnerCam;
+    public Transform ShellFireTrans;
 
     private bool reload; // say if the tank shot
     private float ReloadTime; // to countdown after a shot
@@ -176,13 +177,16 @@ public class TurretController : MonoBehaviourPun
     
     private void FixedUpdate()
     {
-        // give recoil to the tank and throw projectile
-        if (shot)
+        if (photonView.IsMine)
         {
-            gunAnim.Play("shoot");
-            throwIt = PhotonNetwork.Instantiate("Projectile", new Vector3(gun.transform.position.x, gun.transform.position.y, gun.transform.position.z + 3.5f), gun.transform.rotation);
-            throwIt.GetComponent<Rigidbody>().AddForce(gun.transform.forward * -25000, ForceMode.Impulse);
-            shot = false;
+            // give recoil to the tank and throw projectile
+            if (shot)
+            {
+                gunAnim.Play("shoot");
+                throwIt = PhotonNetwork.Instantiate("Projectile", ShellFireTrans.position, ShellFireTrans.rotation);
+                throwIt.GetComponent<Rigidbody>().AddForce(ShellFireTrans.forward * -25000, ForceMode.Impulse);
+                shot = false;
+            }
         }
     }
 
