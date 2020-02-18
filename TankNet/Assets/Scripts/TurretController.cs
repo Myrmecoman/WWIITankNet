@@ -18,6 +18,7 @@ public class TurretController : MonoBehaviourPun
     public Transform ShellFireTrans;
     public GameObject Shell;
     public AudioListener MainAudioListen;
+    public GameObject MuzzleFlash;
 
     private bool reload; // say if the tank shot
     private float ReloadTime; // to countdown after a shot
@@ -185,7 +186,7 @@ public class TurretController : MonoBehaviourPun
             if (shot)
             {
                 gunAnim.Play("shoot");
-                photonView.RPC("Shooting", RpcTarget.All, ShellFireTrans.position);
+                photonView.RPC("Shooting", RpcTarget.All, ShellFireTrans.position, ShellFireTrans.rotation);
                 shot = false;
             }
         }
@@ -193,9 +194,10 @@ public class TurretController : MonoBehaviourPun
 
 
     [PunRPC]
-    void Shooting(Vector3 pos)
+    void Shooting(Vector3 pos, Quaternion rot)
     {
-        GameObject throwIt = Instantiate(Shell, pos, Quaternion.identity);
+        GameObject flash = Instantiate(MuzzleFlash, pos, rot);
+        GameObject throwIt = Instantiate(Shell, pos, rot);
         throwIt.GetComponent<Rigidbody>().AddForce(ShellFireTrans.forward * -25000, ForceMode.Impulse);
     }
 
