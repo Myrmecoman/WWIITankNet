@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Photon.Pun;
 
-public class TurretController : MonoBehaviourPun, IPunObservable
+public class TurretController : MonoBehaviourPun
 {
     public int lifePoints = 2;
     public float sensivity = 1.5f;
@@ -31,12 +31,6 @@ public class TurretController : MonoBehaviourPun, IPunObservable
 
     Vector3 latestPos;
     Quaternion latestRot;
-
-
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-
-    }
 
 
     // Update is called once per frame

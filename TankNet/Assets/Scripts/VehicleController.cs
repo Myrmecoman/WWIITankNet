@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Photon.Pun;
 
-public class VehicleController : MonoBehaviourPun, IPunObservable
+public class VehicleController : MonoBehaviourPun
 {
     // all the wheels that are controlled
     public WheelCollider frontleft, frontright;
@@ -18,12 +18,6 @@ public class VehicleController : MonoBehaviourPun, IPunObservable
     private float s;
     private bool destroyed = false;
     private float force;
-    
-
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-
-    }
 
 
     private void Start()
