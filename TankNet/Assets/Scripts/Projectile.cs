@@ -14,18 +14,20 @@ public class Projectile : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter(Collision coll)
+    private void OnCollisionEnter(Collision col)
     {
-        if (coll.gameObject.tag == "Player")
+        if (col.gameObject.tag == "Player")
         {
             Instantiate(dSphere, transform.position, Quaternion.identity); // instantiate a sphere at collision for debug
             Instantiate(particleVehicle, transform.position, Quaternion.identity);
         }
-        if (coll.gameObject.tag == "Terrainus")
+
+        if (col.gameObject.tag == "Terrainus")
         {
             //Instantiate(dSphere, transform.position, Quaternion.identity); // instantiate a sphere at collision for debug
             Instantiate(particleTerrain, transform.position, Quaternion.identity);
         }
+
         gameObject.GetComponent<Collider>().enabled = false;
         gameObject.GetComponent<Renderer>().enabled = false;
     }

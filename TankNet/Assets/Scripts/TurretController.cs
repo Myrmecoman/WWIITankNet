@@ -200,14 +200,14 @@ public class TurretController : MonoBehaviourPun
         GameObject throwIt = Instantiate(Shell, pos, rot);
         throwIt.GetComponent<Rigidbody>().AddForce(ShellFireTrans.forward * -25000, ForceMode.Impulse);
     }
+    
 
-
-    void OnCollisionEnter(Collision coll)
+    void OnCollisionEnter(Collision col)
     {
-        if (photonView.IsMine && coll.gameObject.tag == "Shell")
+        if (photonView.IsMine && col.gameObject.tag == "Shell")
         {
             Debug.Log("Vehicle with view " + photonView.GetInstanceID() + " was hit");
-            lifePoints = lifePoints - 1;
+            lifePoints -= 1;
             if (lifePoints <= 0)
                 Die();
         }
