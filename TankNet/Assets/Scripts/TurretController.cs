@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Photon.Pun;
+using UnityEngine.UI;
 
 public class TurretController : MonoBehaviourPun
 {
@@ -20,6 +21,8 @@ public class TurretController : MonoBehaviourPun
     public AudioListener MainAudioListen;
     public GameObject MuzzleFlash;
     public GameObject GunSound;
+    public Canvas SightCanvas;
+    public CanvasScaler SightCanvasScale;
 
     private bool reload; // say if the tank shot
     private float ReloadTime; // to countdown after a shot
@@ -32,6 +35,7 @@ public class TurretController : MonoBehaviourPun
     private float destroyTime = 0;
     private Rigidbody vehicleRIGI;
     private float drownCounter = 10;
+    private bool isLocked = false;
 
     Vector3 latestPos;
     Quaternion latestRot;
@@ -42,11 +46,12 @@ public class TurretController : MonoBehaviourPun
     {
         if (photonView.IsMine)
         {
+            SightCanvas.enabled = false;
             Cursor.visible = false;
             magNb = 10;
             timeBetweenShots = 0.2f;
             ReloadTime = 4;
-            fovGunner = 25;
+            fovGunner = GunnerCam.fieldOfView;
             fovLevel = 0;
             shot = false;
             Commandercam.GetComponent<Camera>().enabled = true;
@@ -56,6 +61,7 @@ public class TurretController : MonoBehaviourPun
         }
         else
         {
+            SightCanvas.enabled = false;
             MainAudioListen.enabled = false;
             Commandercam.enabled = false;
             GunnerCam.enabled = false;
@@ -68,6 +74,10 @@ public class TurretController : MonoBehaviourPun
     {
         if (photonView.IsMine)
         {
+            if (Input.GetMouseButton(1))
+                isLocked = true;
+            else
+                isLocked = false;
             // handle the drowning of the vehicle
             if (!isDestroyed)
             {
@@ -82,59 +92,66 @@ public class TurretController : MonoBehaviourPun
                     if (drownCounter < 10)
                         drownCounter = 10;
                 }
-
+                
                 // cam transforms
                 float X = targetparent.localEulerAngles.x - Input.GetAxis("Mouse Y") * sensivity;
                 float Y = targetparent.localEulerAngles.y + Input.GetAxis("Mouse X") * sensivity;
                 targetparent.localEulerAngles = new Vector3(X, Y, 0);
                 Commandercam.transform.eulerAngles = new Vector3(targetparent.localEulerAngles.x, targetparent.eulerAngles.y + 180, targetparent.localEulerAngles.z);
 
-                // turret rotation
-                RotateTurret(target, 22);
-
-                // gun rotation
-                Quaternion cons = gun.transform.rotation;
-                gun.transform.localEulerAngles = new Vector3(-Commandercam.transform.localEulerAngles.x, 0, 0);
-                float newX;
-                if (gun.transform.localEulerAngles.x >= 0 && gun.transform.localEulerAngles.x < 180)
-                    newX = Mathf.Clamp(gun.transform.localEulerAngles.x, 0, 89);
-                else
-                    newX = Mathf.Clamp(gun.transform.localEulerAngles.x, 354.5f, 360);
-                gun.transform.localEulerAngles = new Vector3(newX, 0, 0);
-                gun.transform.rotation = Quaternion.RotateTowards(cons, gun.transform.rotation, 22 * Time.smoothDeltaTime);
-                
-                // zoom in
-                if (Input.GetAxis("Mouse ScrollWheel") > 0 && GunnerCam.GetComponent<Camera>().enabled && fovLevel < 2)
+                if (!isLocked)
                 {
-                    GunnerCam.fieldOfView = fovGunner / 2;
-                    fovGunner = fovGunner / 2;
-                    fovLevel = fovLevel + 1;
-                    sensivity = sensivity / 2;
-                }
+                    // turret rotation
+                    RotateTurret(target, 22);
 
-                // go to gun camera
-                if (Input.GetAxis("Mouse ScrollWheel") > 0 && Commandercam.GetComponent<Camera>().enabled)
-                {
-                    Commandercam.GetComponent<Camera>().enabled = false;
-                    GunnerCam.GetComponent<Camera>().enabled = true;
-                    fovLevel = 1;
-                }
+                    // gun rotation
+                    Quaternion cons = gun.transform.rotation;
+                    gun.transform.localEulerAngles = new Vector3(-Commandercam.transform.localEulerAngles.x, 0, 0);
+                    float newX;
+                    if (gun.transform.localEulerAngles.x >= 0 && gun.transform.localEulerAngles.x < 180)
+                        newX = Mathf.Clamp(gun.transform.localEulerAngles.x, 0, 89);
+                    else
+                        newX = Mathf.Clamp(gun.transform.localEulerAngles.x, 354.5f, 360);
+                    gun.transform.localEulerAngles = new Vector3(newX, 0, 0);
+                    gun.transform.rotation = Quaternion.RotateTowards(cons, gun.transform.rotation, 22 * Time.smoothDeltaTime);
 
-                // go to commander camera
-                if (Input.GetAxis("Mouse ScrollWheel") < 0 && GunnerCam.GetComponent<Camera>().enabled && fovLevel == 1)
-                {
-                    Commandercam.GetComponent<Camera>().enabled = true;
-                    GunnerCam.GetComponent<Camera>().enabled = false;
-                    fovLevel = 0;
-                }
+                    // zoom in
+                    if (Input.GetAxis("Mouse ScrollWheel") > 0 && GunnerCam.GetComponent<Camera>().enabled && fovLevel < 2)
+                    {
+                        GunnerCam.fieldOfView = fovGunner / 2;
+                        SightCanvasScale.scaleFactor *= 2;
+                        fovGunner = fovGunner / 2;
+                        fovLevel = fovLevel + 1;
+                        sensivity = sensivity / 2;
+                    }
 
-                // zoom out
-                if (Input.GetAxis("Mouse ScrollWheel") < 0 && GunnerCam.GetComponent<Camera>().enabled && fovLevel > 1)
-                {
-                    GunnerCam.fieldOfView = fovGunner * 2;
-                    fovGunner = fovGunner * 2;
-                    fovLevel = fovLevel - 1;
-                    sensivity = sensivity * 2;
+                    // go to gun camera
+                    if (Input.GetAxis("Mouse ScrollWheel") > 0 && Commandercam.GetComponent<Camera>().enabled)
+                    {
+                        Commandercam.GetComponent<Camera>().enabled = false;
+                        GunnerCam.GetComponent<Camera>().enabled = true;
+                        SightCanvas.enabled = true;
+                        fovLevel = 1;
+                    }
+
+                    // go to commander camera
+                    if (Input.GetAxis("Mouse ScrollWheel") < 0 && GunnerCam.GetComponent<Camera>().enabled && fovLevel == 1)
+                    {
+                        Commandercam.GetComponent<Camera>().enabled = true;
+                        GunnerCam.GetComponent<Camera>().enabled = false;
+                        SightCanvas.enabled = false;
+                        fovLevel = 0;
+                    }
+
+                    // zoom out
+                    if (Input.GetAxis("Mouse ScrollWheel") < 0 && GunnerCam.GetComponent<Camera>().enabled && fovLevel > 1)
+                    {
+                        GunnerCam.fieldOfView = fovGunner * 2;
+                        SightCanvasScale.scaleFactor /= 2;
+                        fovGunner = fovGunner * 2;
+                        fovLevel = fovLevel - 1;
+                        sensivity = sensivity * 2;
+                    }
                 }
 
                 // shooting system
@@ -145,8 +162,8 @@ public class TurretController : MonoBehaviourPun
 
                 if (timeBetweenShots > 0)
                     timeBetweenShots -= Time.deltaTime;
-                
-                if (Input.GetKey("mouse 0") && timeBetweenShots <= 0 && !reload)
+
+                if (Input.GetMouseButton(0) && timeBetweenShots <= 0 && !reload)
                 {
                     magNb--;
                     timeBetweenShots = 0.2f;
