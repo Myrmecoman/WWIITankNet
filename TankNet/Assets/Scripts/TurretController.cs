@@ -206,7 +206,7 @@ public class TurretController : MonoBehaviourPun
 
     void OnCollisionEnter(Collision col)
     {
-        if (photonView.IsMine && col.gameObject.tag == "Shell")
+        if (photonView.IsMine && col.transform.tag == "Shell")
         {
             Debug.Log("Vehicle with view " + photonView.GetInstanceID() + " was hit");
             lifePoints -= 1;

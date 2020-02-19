@@ -16,13 +16,13 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.tag == "Player")
+        if (col.transform.tag == "Player")
         {
             Instantiate(dSphere, transform.position, Quaternion.identity); // instantiate a sphere at collision for debug
             Instantiate(particleVehicle, transform.position, Quaternion.identity);
         }
 
-        if (col.gameObject.tag == "Terrainus")
+        if (col.transform.tag == "Terrainus")
         {
             //Instantiate(dSphere, transform.position, Quaternion.identity); // instantiate a sphere at collision for debug
             Instantiate(particleTerrain, transform.position, Quaternion.identity);
