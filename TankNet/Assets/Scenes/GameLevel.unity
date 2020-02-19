@@ -660,7 +660,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1510041373}
   - component: {fileID: 1510041372}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PostProcessing
   m_TagString: Untagged
   m_Icon: {fileID: 0}

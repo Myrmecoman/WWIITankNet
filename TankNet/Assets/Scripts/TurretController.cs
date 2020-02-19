@@ -216,6 +216,8 @@ public class TurretController : MonoBehaviourPun
     {
         GameObject flash = Instantiate(MuzzleFlash, pos, rot);
         GameObject sound = Instantiate(GunSound, pos, rot);
+        flash.transform.SetParent(gun.transform);
+        sound.transform.SetParent(gun.transform);
         GameObject throwIt = Instantiate(Shell, pos, rot);
         throwIt.GetComponent<Rigidbody>().AddForce(ShellFireTrans.forward * -25000, ForceMode.Impulse);
     }
