@@ -447,13 +447,13 @@ GameObject:
   - component: {fileID: 2664169669331424596}
   - component: {fileID: 2021013237092402571}
   - component: {fileID: 1515576064465648243}
-  - component: {fileID: 4767641320206317270}
   - component: {fileID: 3119564127971392448}
   - component: {fileID: 8906483000292093217}
   - component: {fileID: 4142461027975722108}
   - component: {fileID: 8286110192090363423}
   - component: {fileID: 2042357736679103970}
   - component: {fileID: 6468843790336009931}
+  - component: {fileID: 1477587393049937931}
   m_Layer: 0
   m_Name: SdKfz222
   m_TagString: Player
@@ -537,20 +537,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &4767641320206317270
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3168798889499754435}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 6344970219130381981, guid: da8d2f0113efa7d4da09e5867e0a5a81, type: 3}
 --- !u!54 &3119564127971392448
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -669,6 +655,19 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 1
   m_TeleportEnabled: 0
   m_TeleportIfDistanceGreaterThan: 3
+--- !u!65 &1477587393049937931
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3168798889499754435}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.0097895, y: 0.70278084, z: 3.5059357}
+  m_Center: {x: 1.0048947, y: 0.77062637, z: 2.1781497}
 --- !u!1 &3216454343774365142
 GameObject:
   m_ObjectHideFlags: 0
