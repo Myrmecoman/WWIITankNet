@@ -639,6 +639,8 @@ MonoBehaviour:
   Shell: {fileID: 8077318481018330977, guid: fe3e7c8dfec1ffc4cacdbc529c9edef6, type: 3}
   MainAudioListen: {fileID: 795160477615947096}
   MuzzleFlash: {fileID: 100006, guid: c888f0c922d622147bbdbe2ca794142b, type: 3}
+  GunSound: {fileID: 8629395255748973170, guid: b57d02dfe9a1d544997e5e86b2ec3c18,
+    type: 3}
 --- !u!114 &6468843790336009931
 MonoBehaviour:
   m_ObjectHideFlags: 0

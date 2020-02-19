@@ -19,6 +19,7 @@ public class TurretController : MonoBehaviourPun
     public GameObject Shell;
     public AudioListener MainAudioListen;
     public GameObject MuzzleFlash;
+    public GameObject GunSound;
 
     private bool reload; // say if the tank shot
     private float ReloadTime; // to countdown after a shot
@@ -197,6 +198,7 @@ public class TurretController : MonoBehaviourPun
     void Shooting(Vector3 pos, Quaternion rot)
     {
         GameObject flash = Instantiate(MuzzleFlash, pos, rot);
+        GameObject sound = Instantiate(GunSound, pos, rot);
         GameObject throwIt = Instantiate(Shell, pos, rot);
         throwIt.GetComponent<Rigidbody>().AddForce(ShellFireTrans.forward * -25000, ForceMode.Impulse);
     }
