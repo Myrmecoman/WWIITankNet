@@ -22,7 +22,7 @@ public class TurretController : MonoBehaviourPun
     public GameObject MuzzleFlash;
     public GameObject GunSound;
     public Canvas SightCanvas;
-    public CanvasScaler SightCanvasScale;
+    public RectTransform CanvasSize;
 
     private bool reload; // say if the tank shot
     private float ReloadTime; // to countdown after a shot
@@ -119,7 +119,7 @@ public class TurretController : MonoBehaviourPun
                     if (Input.GetAxis("Mouse ScrollWheel") > 0 && GunnerCam.GetComponent<Camera>().enabled && fovLevel < 2)
                     {
                         GunnerCam.fieldOfView = fovGunner / 2;
-                        SightCanvasScale.scaleFactor *= 2;
+                        CanvasSize.localScale = new Vector3(CanvasSize.localScale.x * 2, CanvasSize.localScale.y * 2, CanvasSize.localScale.z * 2);
                         fovGunner = fovGunner / 2;
                         fovLevel = fovLevel + 1;
                         sensivity = sensivity / 2;
@@ -147,7 +147,7 @@ public class TurretController : MonoBehaviourPun
                     if (Input.GetAxis("Mouse ScrollWheel") < 0 && GunnerCam.GetComponent<Camera>().enabled && fovLevel > 1)
                     {
                         GunnerCam.fieldOfView = fovGunner * 2;
-                        SightCanvasScale.scaleFactor /= 2;
+                        CanvasSize.localScale = new Vector3(CanvasSize.localScale.x / 2, CanvasSize.localScale.y / 2, CanvasSize.localScale.z / 2);
                         fovGunner = fovGunner * 2;
                         fovLevel = fovLevel - 1;
                         sensivity = sensivity * 2;
