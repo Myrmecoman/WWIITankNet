@@ -167,6 +167,14 @@ public class TurretController : MonoBehaviourPun
                 }
 
                 // shooting system
+                if(Input.GetKeyDown(KeyCode.R) && !reload && magNb != 10)
+                {
+                    magNb = 10;
+                    ReloadTime = 4;
+                    reload = true;
+                    Debug.Log("Force Reloading");
+                }
+
                 if (ReloadTime > 0 && reload == true)
                     ReloadTime -= Time.deltaTime;
                 else if (reload == true)
