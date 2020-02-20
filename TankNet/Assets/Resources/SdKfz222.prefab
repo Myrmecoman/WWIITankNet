@@ -639,7 +639,7 @@ MonoBehaviour:
   Commandercam: {fileID: 7069657855161317430}
   GunnerCam: {fileID: 2693301954242176300}
   ShellFireTrans: {fileID: 4359579575939230999}
-  Shell: {fileID: 8077318481018330977, guid: fe3e7c8dfec1ffc4cacdbc529c9edef6, type: 3}
+  Shell: {fileID: 2616287613133823158, guid: fe3e7c8dfec1ffc4cacdbc529c9edef6, type: 3}
   MainAudioListen: {fileID: 795160477615947096}
   MuzzleFlash: {fileID: 100006, guid: c888f0c922d622147bbdbe2ca794142b, type: 3}
   GunSound: {fileID: 8629395255748973170, guid: b57d02dfe9a1d544997e5e86b2ec3c18,
@@ -675,8 +675,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.0097895, y: 0.70278084, z: 3.5059357}
-  m_Center: {x: 1.0048947, y: 0.77062637, z: 2.1781497}
+  m_Size: {x: 2.0097895, y: 0.82073987, z: 3.5059357}
+  m_Center: {x: 1.0048947, y: 0.58736044, z: 2.1781497}
 --- !u!1 &3216454343774365142
 GameObject:
   m_ObjectHideFlags: 0
