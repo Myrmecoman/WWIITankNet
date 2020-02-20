@@ -33,5 +33,6 @@ MonoBehaviour:
   - DestroyRpc
   - shoot
   - Shooting
+  - SendLightStatus
   DisableAutoOpenWizard: 1
   ShowSettings: 0

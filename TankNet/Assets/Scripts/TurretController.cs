@@ -23,6 +23,8 @@ public class TurretController : MonoBehaviourPun
     public GameObject GunSound;
     public Canvas SightCanvas;
     public RectTransform CanvasSize;
+    public Light lightL;
+    public Light lightR;
 
     private bool reload; // say if the tank shot
     private float ReloadTime; // to countdown after a shot
@@ -44,9 +46,12 @@ public class TurretController : MonoBehaviourPun
     // Update is called once per frame
     void Start()
     {
+        lightL.enabled = false;
+        lightR.enabled = false;
+        SightCanvas.enabled = false;
+
         if (photonView.IsMine)
         {
-            SightCanvas.enabled = false;
             Cursor.visible = false;
             magNb = 10;
             timeBetweenShots = 0.2f;
@@ -61,7 +66,6 @@ public class TurretController : MonoBehaviourPun
         }
         else
         {
-            SightCanvas.enabled = false;
             MainAudioListen.enabled = false;
             Commandercam.enabled = false;
             GunnerCam.enabled = false;
@@ -78,6 +82,14 @@ public class TurretController : MonoBehaviourPun
                 isLocked = true;
             else
                 isLocked = false;
+
+            if(Input.GetKeyDown(KeyCode.L))
+            {
+                lightL.enabled = !lightL.enabled;
+                lightR.enabled = !lightR.enabled;
+                photonView.RPC("SendLightStatus", RpcTarget.Others, lightL.enabled);
+            }
+
             // handle the drowning of the vehicle
             if (!isDestroyed)
             {
@@ -220,6 +232,14 @@ public class TurretController : MonoBehaviourPun
         sound.transform.SetParent(gun.transform);
         GameObject throwIt = Instantiate(Shell, pos, rot);
         throwIt.GetComponent<Rigidbody>().AddForce(ShellFireTrans.forward * -25000, ForceMode.Impulse);
+    }
+
+
+    [PunRPC]
+    void SendLightStatus(bool b)
+    {
+        lightL.enabled = b;
+        lightR.enabled = b;
     }
     
 
