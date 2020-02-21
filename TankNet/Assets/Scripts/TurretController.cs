@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class TurretController : MonoBehaviourPun
 {
-    public int lifePoints = 2;
+    public int lifePoints = 5;
     public float sensivity = 1.5f;
     public float depression;
     public float elevation;
@@ -239,7 +239,7 @@ public class TurretController : MonoBehaviourPun
         flash.transform.SetParent(gun.transform);
         sound.transform.SetParent(gun.transform);
         GameObject throwIt = Instantiate(Shell, pos, rot * Quaternion.Euler(90, 0, 0));
-        throwIt.GetComponent<Rigidbody>().AddForce(ShellFireTrans.forward * -25000, ForceMode.Impulse);
+        throwIt.GetComponent<Rigidbody>().AddForce(ShellFireTrans.forward * -22000, ForceMode.Impulse);
     }
 
 

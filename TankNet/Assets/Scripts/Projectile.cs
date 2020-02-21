@@ -18,13 +18,11 @@ public class Projectile : MonoBehaviour
     {
         if (col.transform.tag == "Player")
         {
-            Instantiate(dSphere, transform.position, Quaternion.identity); // instantiate a sphere at collision for debug
             Instantiate(particleVehicle, transform.position, Quaternion.identity);
         }
 
         if (col.transform.tag == "Terrainus")
         {
-            //Instantiate(dSphere, transform.position, Quaternion.identity); // instantiate a sphere at collision for debug
             Instantiate(particleTerrain, transform.position, Quaternion.identity);
         }
 
@@ -32,3 +30,6 @@ public class Projectile : MonoBehaviour
         gameObject.GetComponent<Renderer>().enabled = false;
     }
 }
+
+// line I may want to use later for debug
+//Instantiate(dSphere, transform.position, Quaternion.identity); // instantiate a sphere at collision for debug
