@@ -12,11 +12,9 @@ public class VehicleController : MonoBehaviourPun
     public float motorForce = 300;
     public AudioSource audioEngine;
     public AudioClip engineIdle;
-    public AudioClip engineRunning1;
     public AudioClip engineRunning2;
     public AudioClip engineRunning3;
     public AudioClip engineRunning4;
-    public AudioClip engineRunning5;
 
     [HideInInspector]
     public bool destroyed = false;

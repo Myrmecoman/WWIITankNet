@@ -813,11 +813,9 @@ MonoBehaviour:
   motorForce: 800
   audioEngine: {fileID: 1125219794797023948}
   engineIdle: {fileID: 8300000, guid: 019fc8cc9c4a8b74cbc7ff150742b32f, type: 3}
-  engineRunning1: {fileID: 8300000, guid: ab2b337b9f4df434e83733a058205b82, type: 3}
   engineRunning2: {fileID: 8300000, guid: 2875fc087ec344a4bbf37112f1844a2a, type: 3}
   engineRunning3: {fileID: 8300000, guid: 31076ab7ec4d3724db0f7e9d27ec4792, type: 3}
   engineRunning4: {fileID: 8300000, guid: 51fa6b260aed0af4698d648f48760a13, type: 3}
-  engineRunning5: {fileID: 8300000, guid: 8c3c8e95f00e2f644b5c335a58c3ff16, type: 3}
   destroyed: 0
 --- !u!114 &2042357736679103970
 MonoBehaviour:
@@ -831,9 +829,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 307892c3462a31d41b8ed8d58ac250b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifePoints: 2
+  lifePoints: 4
   sensivity: 1.5
-  depression: -5.5
+  depression: -6
   elevation: 89
   gun: {fileID: 9191993486248701490}
   gunAnim: {fileID: 6086697786428423244}
@@ -1394,7 +1392,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 019fc8cc9c4a8b74cbc7ff150742b32f, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.3
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0

@@ -5,6 +5,10 @@ public class PUN2_RoomController : MonoBehaviourPunCallbacks
 {
     public GameObject playerPrefab;
     public Transform[] spawnPoint;
+
+    private double t = 0;
+    private bool spawned = false;
+
     
     void Start()
     {
@@ -14,9 +18,17 @@ public class PUN2_RoomController : MonoBehaviourPunCallbacks
             UnityEngine.SceneManagement.SceneManager.LoadScene("GameLobby");
             return;
         }
-        
-        // Spawn the player
-        PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint[Random.Range(0, spawnPoint.Length - 1)].position, Quaternion.identity, 0);
+    }
+
+    void Update()
+    {
+        if (t < 3)
+            t += Time.deltaTime;
+        else if (!spawned)
+        {
+            PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint[Random.Range(0, spawnPoint.Length - 1)].position, Quaternion.identity, 0);
+            spawned = true;
+        }
     }
 
     void OnGUI()
