@@ -19,7 +19,7 @@ public class Projectile : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.AddForce(transform.forward * 3000, ForceMode.Force);
+        rb.AddForce(transform.forward * 400, ForceMode.Force);
     }
 
 

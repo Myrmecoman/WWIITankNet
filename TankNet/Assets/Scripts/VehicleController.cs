@@ -10,6 +10,10 @@ public class VehicleController : MonoBehaviourPun
     public Transform rearleftT, rearrightT;
     public float maxSteerAngle = 30;
     public float motorForce = 300;
+    public AudioSource audioEngine;
+    public AudioClip engineRunning;
+    public AudioClip engineIdle;
+    public float modifier = 1;
     
     [HideInInspector]
     public bool destroyed = false;
@@ -20,6 +24,7 @@ public class VehicleController : MonoBehaviourPun
     private Rigidbody rb;
     private float s;
     private float force;
+    private float soundPitchDiff;
 
 
     private void Start()
@@ -27,7 +32,34 @@ public class VehicleController : MonoBehaviourPun
         rb = GetComponent<Rigidbody>();
         rb.centerOfMass = new Vector3(rb.centerOfMass.x, rb.centerOfMass.y - 1, rb.centerOfMass.z);
     }
-    
+
+
+    private void Update()
+    {
+        float s = rb.velocity.magnitude;
+        if (s < 0.1f)
+        {
+            soundPitchDiff = 1;
+            audioEngine.clip = engineIdle;
+        }
+        else if (s < 1.4f)
+        {
+            soundPitchDiff = 0.5f;
+            audioEngine.clip = engineRunning;
+        }
+        else if (s < 4.2f)
+            soundPitchDiff = 0.8f;
+        else if (s < 8.4f)
+            soundPitchDiff = 1;
+        else
+            soundPitchDiff = 1.2f;
+
+        if(s < 0.1f)
+            audioEngine.pitch = 0.7f;
+        else
+            audioEngine.pitch = (s * 3.6f) / soundPitchDiff * 0.06f * modifier;
+    }
+
 
     private void FixedUpdate()
     {

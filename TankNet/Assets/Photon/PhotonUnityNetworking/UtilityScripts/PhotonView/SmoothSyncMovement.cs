@@ -22,6 +22,8 @@ namespace Photon.Pun.UtilityScripts
     public class SmoothSyncMovement : Photon.Pun.MonoBehaviourPun, IPunObservable
     {
         public float SmoothingDelay = 5;
+
+
         public void Awake()
         {
             bool observed = false;
@@ -39,6 +41,7 @@ namespace Photon.Pun.UtilityScripts
             }
         }
 
+
         public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
         {
             if (stream.IsWriting)
@@ -55,8 +58,10 @@ namespace Photon.Pun.UtilityScripts
             }
         }
 
+
         private Vector3 correctPlayerPos = Vector3.zero; //We lerp towards this
         private Quaternion correctPlayerRot = Quaternion.identity; //We lerp towards this
+
 
         public void Update()
         {

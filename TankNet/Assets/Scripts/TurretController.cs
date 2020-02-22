@@ -55,6 +55,7 @@ public class TurretController : MonoBehaviourPun
         if (photonView.IsMine)
         {
             Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
             magNb = 10;
             timeBetweenShots = 0.2f;
             ReloadTime = 4;
@@ -80,6 +81,20 @@ public class TurretController : MonoBehaviourPun
     {
         if (photonView.IsMine)
         {
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                if(Cursor.lockState == CursorLockMode.Locked)
+                {
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                }
+                else
+                {
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                }
+            }
+
             if (Input.GetMouseButton(1))
                 isLocked = true;
             else
@@ -214,6 +229,7 @@ public class TurretController : MonoBehaviourPun
                 if (destroyTime > 5)
                 {
                     Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
                     PhotonNetwork.Destroy(photonView);
                     PhotonNetwork.LeaveRoom();
                 }
@@ -255,7 +271,7 @@ public class TurretController : MonoBehaviourPun
         flash.transform.SetParent(gun.transform);
         sound.transform.SetParent(gun.transform);
         GameObject throwIt = Instantiate(Shell, pos, rot * Quaternion.Euler(90, 0, 0));
-        throwIt.GetComponent<Rigidbody>().AddForce(ShellFireTrans.forward * -22000, ForceMode.Impulse);
+        throwIt.GetComponent<Rigidbody>().AddForce(ShellFireTrans.forward * -2200, ForceMode.Impulse);
     }
 
 
