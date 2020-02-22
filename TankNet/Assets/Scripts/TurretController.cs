@@ -69,6 +69,8 @@ public class TurretController : MonoBehaviourPun
         }
         else
         {
+            DestroyText.enabled = false;
+            reloadingTxt.enabled = false;
             MainAudioListen.enabled = false;
             Commandercam.enabled = false;
             GunnerCam.enabled = false;

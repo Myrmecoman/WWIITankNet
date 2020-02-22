@@ -11,10 +11,13 @@ public class VehicleController : MonoBehaviourPun
     public float maxSteerAngle = 30;
     public float motorForce = 300;
     public AudioSource audioEngine;
-    public AudioClip engineRunning;
     public AudioClip engineIdle;
-    public float modifier = 1;
-    
+    public AudioClip engineRunning1;
+    public AudioClip engineRunning2;
+    public AudioClip engineRunning3;
+    public AudioClip engineRunning4;
+    public AudioClip engineRunning5;
+
     [HideInInspector]
     public bool destroyed = false;
 
@@ -24,7 +27,6 @@ public class VehicleController : MonoBehaviourPun
     private Rigidbody rb;
     private float s;
     private float force;
-    private float soundPitchDiff;
 
 
     private void Start()
@@ -34,30 +36,49 @@ public class VehicleController : MonoBehaviourPun
     }
 
 
-    private void Update()
+    void Update()
     {
-        float s = rb.velocity.magnitude;
-        if (s < 0.1f)
+        float sp = rb.velocity.magnitude;
+        if (sp < 0.2f)
         {
-            soundPitchDiff = 1;
-            audioEngine.clip = engineIdle;
+            if (audioEngine.isPlaying && audioEngine.clip.name != engineIdle.name)
+            {
+                audioEngine.Stop();
+                audioEngine.clip = engineIdle;
+                audioEngine.Play();
+            }
+            audioEngine.pitch = 0.95f;
         }
-        else if (s < 1.4f)
+        else if (sp < 4.2f)
         {
-            soundPitchDiff = 0.5f;
-            audioEngine.clip = engineRunning;
+            if (audioEngine.isPlaying && audioEngine.clip.name != engineRunning2.name)
+            {
+                audioEngine.Stop();
+                audioEngine.clip = engineRunning2;
+                audioEngine.Play();
+            }
+            audioEngine.pitch = 0.95f + ((sp - 0.2f) / 20);
         }
-        else if (s < 4.2f)
-            soundPitchDiff = 0.8f;
-        else if (s < 8.4f)
-            soundPitchDiff = 1;
+        else if (sp < 8.4f)
+        {
+            if (audioEngine.isPlaying && audioEngine.clip.name != engineRunning3.name)
+            {
+                audioEngine.Stop();
+                audioEngine.clip = engineRunning3;
+                audioEngine.Play();
+            }
+            audioEngine.pitch = 0.95f + ((sp - 4.2f) / 20);
+        }
         else
-            soundPitchDiff = 1.2f;
-
-        if(s < 0.1f)
-            audioEngine.pitch = 0.7f;
-        else
-            audioEngine.pitch = (s * 3.6f) / soundPitchDiff * 0.06f * modifier;
+        {
+            if (audioEngine.isPlaying && audioEngine.clip.name != engineRunning4.name)
+            {
+                audioEngine.Stop();
+                audioEngine.clip = engineRunning4;
+                audioEngine.Play();
+            }
+            audioEngine.pitch = 0.95f + ((sp - 8.4f) / 20);
+        }
     }
 
 
@@ -68,7 +89,6 @@ public class VehicleController : MonoBehaviourPun
             s = rb.velocity.magnitude;
             //Debug.Log("speed is " + s * 3.6f);
             
-            // manage the movements of the tank
             GetInput();
             Steer();
             UpdateWheelPoses();
@@ -106,15 +126,25 @@ public class VehicleController : MonoBehaviourPun
     private void Accelerate(float s)
     {
         if (s < 1.4f)
+        {
             force = motorForce * 3;
+        }
         else if (s < 4.2f)
+        {
             force = motorForce * 2;
+        }
         else if (s < 8.4f)
+        {
             force = motorForce;
+        }
         else if (s < 16)
+        {
             force = motorForce * 0.5f;
+        }
         else
+        {
             force = 0;
+        }
 
         frontleft.motorTorque = m_verticalInput * force;
         frontright.motorTorque = m_verticalInput * force;
