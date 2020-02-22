@@ -4,7 +4,7 @@ using Photon.Pun;
 public class PUN2_RoomController : MonoBehaviourPunCallbacks
 {
     public GameObject playerPrefab;
-    public Transform spawnPoint;
+    public Transform[] spawnPoint;
     
     void Start()
     {
@@ -16,7 +16,7 @@ public class PUN2_RoomController : MonoBehaviourPunCallbacks
         }
         
         // Spawn the player
-        PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint.position, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint[Random.Range(0, spawnPoint.Length - 1)].position, Quaternion.identity, 0);
     }
 
     void OnGUI()

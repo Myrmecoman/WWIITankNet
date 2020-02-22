@@ -23,6 +23,8 @@ public class TurretController : MonoBehaviourPun
     public GameObject GunSound;
     public Canvas SightCanvas;
     public RectTransform CanvasSize;
+    public Text DestroyText;
+    public Text reloadingTxt;
     public Light lightL;
     public Light lightR;
 
@@ -52,7 +54,7 @@ public class TurretController : MonoBehaviourPun
 
         if (photonView.IsMine)
         {
-            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
             magNb = 10;
             timeBetweenShots = 0.2f;
             ReloadTime = 4;
@@ -93,9 +95,10 @@ public class TurretController : MonoBehaviourPun
             // handle the drowning of the vehicle
             if (!isDestroyed)
             {
-                if (vehicle.transform.position.y < -1)
+                if (vehicle.transform.position.y < 14.3f)
                 {
                     drownCounter = drownCounter - Time.deltaTime;
+                    DestroyText.text = "You will sink in " + (int)drownCounter + " seconds";
                     if (drownCounter < 0)
                         Die();
                 }
@@ -103,6 +106,8 @@ public class TurretController : MonoBehaviourPun
                 {
                     if (drownCounter < 10)
                         drownCounter = 10;
+                    if (DestroyText.text != "")
+                        DestroyText.text = "";
                 }
                 
                 // cam transforms
@@ -176,9 +181,15 @@ public class TurretController : MonoBehaviourPun
                 }
 
                 if (ReloadTime > 0 && reload == true)
+                {
                     ReloadTime -= Time.deltaTime;
+                    reloadingTxt.text = "Reloading : " + ReloadTime.ToString("F1");
+                }
                 else if (reload == true)
+                {
                     reload = false;
+                    reloadingTxt.text = "Reloading : 4";
+                }
 
                 if (timeBetweenShots > 0)
                     timeBetweenShots -= Time.deltaTime;
@@ -200,8 +211,12 @@ public class TurretController : MonoBehaviourPun
             else
             {
                 destroyTime = destroyTime + Time.deltaTime;
-                if (destroyTime > 6)
+                if (destroyTime > 5)
+                {
+                    Cursor.lockState = CursorLockMode.None;
                     PhotonNetwork.Destroy(photonView);
+                    PhotonNetwork.LeaveRoom();
+                }
             }
         }
     }
@@ -236,6 +251,7 @@ public class TurretController : MonoBehaviourPun
     {
         GameObject flash = Instantiate(MuzzleFlash, pos, rot);
         GameObject sound = Instantiate(GunSound, pos, rot);
+        sound.GetComponent<AudioSource>().pitch = sound.GetComponent<AudioSource>().pitch - (Vector3.Distance(Commandercam.transform.position, pos)/100) + Random.Range(-0.1f, 0);
         flash.transform.SetParent(gun.transform);
         sound.transform.SetParent(gun.transform);
         GameObject throwIt = Instantiate(Shell, pos, rot * Quaternion.Euler(90, 0, 0));
@@ -268,7 +284,8 @@ public class TurretController : MonoBehaviourPun
         if (photonView.IsMine)
         {
             isDestroyed = true;
-            GetComponent<VehicleController>().enabled = false;
+            DestroyText.text = "Vehicle destroyed";
+            GetComponent<VehicleController>().destroyed = true;
         }
     }
 }

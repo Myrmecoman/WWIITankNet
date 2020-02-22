@@ -14398,7 +14398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ObjToDestroy: {fileID: 100006}
-  TimeToDestroy: 0.2
+  TimeToDestroy: 1
 --- !u!1 &100008
 GameObject:
   m_ObjectHideFlags: 0
@@ -24027,8 +24027,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 9
   m_Type: 2
-  m_Color: {r: 0.9843137, g: 0.84911484, b: 0.43529415, a: 1}
-  m_Intensity: 12.4
+  m_Color: {r: 1, g: 0.9188467, b: 0.5235849, a: 1}
+  m_Intensity: 8
   m_Range: 2
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208

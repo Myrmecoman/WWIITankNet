@@ -10,13 +10,15 @@ public class VehicleController : MonoBehaviourPun
     public Transform rearleftT, rearrightT;
     public float maxSteerAngle = 30;
     public float motorForce = 300;
+    
+    [HideInInspector]
+    public bool destroyed = false;
 
     private float m_horizontalInput;
     private float m_verticalInput;
     private float m_steeringAngle;
     private Rigidbody rb;
     private float s;
-    private bool destroyed = false;
     private float force;
 
 
@@ -40,10 +42,10 @@ public class VehicleController : MonoBehaviourPun
             UpdateWheelPoses();
             if (Input.GetKey("space") || destroyed || s >= 16)
             {
-                frontleft.brakeTorque = 5000;
-                frontright.brakeTorque = 5000;
-                rearleft.brakeTorque = 5000;
-                rearright.brakeTorque = 5000;
+                frontleft.brakeTorque = 7000;
+                frontright.brakeTorque = 7000;
+                rearleft.brakeTorque = 7000;
+                rearright.brakeTorque = 7000;
             }
             else
             {

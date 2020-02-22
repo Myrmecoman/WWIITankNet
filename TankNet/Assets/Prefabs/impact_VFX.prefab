@@ -248,8 +248,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 1
-      minScalar: 0.5
+      scalar: 2
+      minScalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -4662,7 +4662,7 @@ GameObject:
   - component: {fileID: 19900002}
   - component: {fileID: 5693756365400242212}
   m_Layer: 0
-  m_Name: WFX_BImpact SoftBody
+  m_Name: impact_VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9314,7 +9314,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ObjToDestroy: {fileID: 100002}
-  TimeToDestroy: 4
+  TimeToDestroy: 5
 --- !u!1 &100004
 GameObject:
   m_ObjectHideFlags: 0
@@ -9563,7 +9563,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.05
+      scalar: 0.1
       minScalar: 1
       maxCurve:
         serializedVersion: 2

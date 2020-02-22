@@ -40,7 +40,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100000}
   serializedVersion: 6
-  lengthInSec: 0.5
+  lengthInSec: 0.7
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 3
@@ -248,8 +248,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.2
-      minScalar: 0.1
+      scalar: 0.3
+      minScalar: 0.2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -282,7 +282,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -335,7 +335,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeZ:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -528,13 +528,13 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 16
+    maxNumParticles: 30
     size3D: 0
     rotation3D: 0
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 0
       minScalar: 2
       maxCurve:
         serializedVersion: 2
@@ -587,7 +587,7 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 4
+    type: 0
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
@@ -4651,9 +4651,9 @@ GameObject:
   - component: {fileID: 400002}
   - component: {fileID: 19800002}
   - component: {fileID: 19900002}
-  - component: {fileID: 11400000}
+  - component: {fileID: 3769122566089737134}
   m_Layer: 0
-  m_Name: WFX_BImpact Metal
+  m_Name: metalImpact_VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4682,7 +4682,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100002}
   serializedVersion: 6
-  lengthInSec: 0.2
+  lengthInSec: 0.3
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 3
@@ -4890,8 +4890,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.3
-      minScalar: 0.2
+      scalar: 0.5
+      minScalar: 0.4
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -9300,7 +9300,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &11400000
+--- !u!114 &3769122566089737134
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9309,7 +9309,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fd2e8874f60266498a388d7229a1bac, type: 3}
+  m_Script: {fileID: 11500000, guid: e49f9da16d6af1444beb95cff67e4c58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnlyDeactivate: 0
+  ObjToDestroy: {fileID: 100002}
+  TimeToDestroy: 5

@@ -5,12 +5,21 @@ public class Projectile : MonoBehaviour
     public GameObject particleTerrain;
     public GameObject particleVehicle;
     public GameObject dSphere;
+
+    private Rigidbody rb;
     
 
     // Use this for initialization
-    void Start()
+    private void Start()
     {
         Destroy(gameObject, 8);
+        rb = GetComponent<Rigidbody>();
+    }
+
+
+    private void FixedUpdate()
+    {
+        rb.AddForce(transform.forward * 3000, ForceMode.Force);
     }
 
 
