@@ -12,9 +12,9 @@ public class VehicleController : MonoBehaviourPun
     public float motorForce = 300;
     public AudioSource audioEngine;
     public AudioClip engineIdle;
+    public AudioClip engineRunning1;
     public AudioClip engineRunning2;
     public AudioClip engineRunning3;
-    public AudioClip engineRunning4;
 
     [HideInInspector]
     public bool destroyed = false;
@@ -49,30 +49,30 @@ public class VehicleController : MonoBehaviourPun
         }
         else if (sp < 4.2f)
         {
-            if (audioEngine.isPlaying && audioEngine.clip.name != engineRunning2.name)
+            if (audioEngine.isPlaying && audioEngine.clip.name != engineRunning1.name)
             {
                 audioEngine.Stop();
-                audioEngine.clip = engineRunning2;
+                audioEngine.clip = engineRunning1;
                 audioEngine.Play();
             }
             audioEngine.pitch = 0.95f + ((sp - 0.2f) / 20);
         }
         else if (sp < 8.4f)
         {
-            if (audioEngine.isPlaying && audioEngine.clip.name != engineRunning3.name)
+            if (audioEngine.isPlaying && audioEngine.clip.name != engineRunning2.name)
             {
                 audioEngine.Stop();
-                audioEngine.clip = engineRunning3;
+                audioEngine.clip = engineRunning2;
                 audioEngine.Play();
             }
             audioEngine.pitch = 0.95f + ((sp - 4.2f) / 20);
         }
         else
         {
-            if (audioEngine.isPlaying && audioEngine.clip.name != engineRunning4.name)
+            if (audioEngine.isPlaying && audioEngine.clip.name != engineRunning3.name)
             {
                 audioEngine.Stop();
-                audioEngine.clip = engineRunning4;
+                audioEngine.clip = engineRunning3;
                 audioEngine.Play();
             }
             audioEngine.pitch = 0.95f + ((sp - 8.4f) / 20);
@@ -86,7 +86,10 @@ public class VehicleController : MonoBehaviourPun
         {
             s = rb.velocity.magnitude;
             //Debug.Log("speed is " + s * 3.6f);
-            
+
+            if(s == 0)
+                photonView.RPC("SendBrake", RpcTarget.Others);
+
             GetInput();
             Steer();
             UpdateWheelPoses();
@@ -106,6 +109,15 @@ public class VehicleController : MonoBehaviourPun
                 Accelerate(s);
             }
         }
+    }
+
+    [PunRPC]
+    void SendBrake()
+    {
+        frontleft.brakeTorque = 7000;
+        frontright.brakeTorque = 7000;
+        rearleft.brakeTorque = 7000;
+        rearright.brakeTorque = 7000;
     }
     
     public void GetInput()

@@ -22,7 +22,7 @@ public class PUN2_RoomController : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        if (t < 3)
+        if (t < 1.5f)
             t += Time.deltaTime;
         else if (!spawned)
         {

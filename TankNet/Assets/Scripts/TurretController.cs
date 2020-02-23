@@ -17,6 +17,7 @@ public class TurretController : MonoBehaviourPun
     public Camera Commandercam;
     public Camera GunnerCam;
     public Transform ShellFireTrans;
+    public AudioSource ReloadSound;
     public GameObject Shell;
     public AudioListener MainAudioListen;
     public GameObject MuzzleFlash;
@@ -194,6 +195,7 @@ public class TurretController : MonoBehaviourPun
                     magNb = 10;
                     ReloadTime = 4;
                     reload = true;
+                    ReloadSound.Play();
                     Debug.Log("Force Reloading");
                 }
 
@@ -221,6 +223,7 @@ public class TurretController : MonoBehaviourPun
                         magNb = 10;
                         ReloadTime = 4;
                         reload = true;
+                        ReloadSound.Play();
                         Debug.Log("Reloading");
                     }
                 }

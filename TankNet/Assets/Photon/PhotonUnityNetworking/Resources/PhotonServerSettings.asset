@@ -34,5 +34,7 @@ MonoBehaviour:
   - shoot
   - Shooting
   - SendLightStatus
+  - UpdateTransform
+  - SendBrake
   DisableAutoOpenWizard: 1
   ShowSettings: 0
