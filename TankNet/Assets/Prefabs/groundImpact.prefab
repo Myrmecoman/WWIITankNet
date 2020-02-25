@@ -4662,6 +4662,7 @@ GameObject:
   - component: {fileID: 19900002}
   - component: {fileID: 5693756365400242212}
   - component: {fileID: 3492024118107707688}
+  - component: {fileID: 8709775944256435465}
   m_Layer: 0
   m_Name: groundImpact
   m_TagString: Untagged
@@ -9327,9 +9328,9 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 17a53d414f1cee44d88e933cbd69345d, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: 0.9
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -9412,6 +9413,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8709775944256435465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e9107e140676b44a91254c900a9de2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pitchChangeValue: 0.05
 --- !u!1 &100004
 GameObject:
   m_ObjectHideFlags: 0

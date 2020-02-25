@@ -4653,6 +4653,7 @@ GameObject:
   - component: {fileID: 19900002}
   - component: {fileID: 3769122566089737134}
   - component: {fileID: 4343656678745971057}
+  - component: {fileID: 65309669982141472}
   m_Layer: 0
   m_Name: metalImpact_VFX
   m_TagString: Untagged
@@ -9326,7 +9327,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: d26bba586732bba488129eea6553bd01, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -9411,3 +9412,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &65309669982141472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e9107e140676b44a91254c900a9de2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pitchChangeValue: 0.05
