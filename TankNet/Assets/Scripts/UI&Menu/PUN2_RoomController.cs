@@ -13,7 +13,7 @@ public class PUN2_RoomController : MonoBehaviourPunCallbacks
     private int h;
     private int m;
 
-    
+
     void Start()
     {
         if (PhotonNetwork.CurrentRoom == null)
@@ -31,21 +31,24 @@ public class PUN2_RoomController : MonoBehaviourPunCallbacks
             SunRotation.rotation = Quaternion.Euler(360 * (h - 6) / 24 + 15 * m / 60, SunRotation.rotation.eulerAngles.y, SunRotation.rotation.eulerAngles.z);
         }
         else
-            photonView.RPC("Ask", RpcTarget.MasterClient);
+        {
+            photonView.RPC("Ask", RpcTarget.MasterClient, photonView.ViewID);
+        }
     }
 
     [PunRPC]
-    void Ask()
+    void Ask(int id)
     {
-        Debug.Log("We are master client, send rotations for time");
-        photonView.RPC("Rotations", RpcTarget.Others, h, m);
+        Debug.Log("Your are MasterClient and I want your fucking sun rotations");
+        photonView.RPC("Send", RpcTarget.Others, SunRotation.rotation, id);
     }
 
     [PunRPC]
-    void Rotations(int hi, int mi)
+    void Send(Quaternion sunrot, int id)
     {
-        Debug.Log("We are joining, receive time");
-        SunRotation.rotation = Quaternion.Euler(360 * (hi - 6) / 24 + 15 * mi / 60, SunRotation.rotation.eulerAngles.y, SunRotation.rotation.eulerAngles.z);
+        Debug.Log("MasterClient sends you all his fucking rotation");
+        if(photonView.ViewID == id)
+            SunRotation.rotation = sunrot;
     }
 
     void Update()
