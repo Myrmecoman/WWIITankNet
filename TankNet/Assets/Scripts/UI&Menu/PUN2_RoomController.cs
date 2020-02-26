@@ -1,13 +1,17 @@
 ﻿using UnityEngine;
 using Photon.Pun;
 
+
 public class PUN2_RoomController : MonoBehaviourPunCallbacks
 {
+    public Transform SunRotation;
     public GameObject playerPrefab;
     public Transform[] spawnPoint;
 
     private double t = 0;
     private bool spawned = false;
+    private int h;
+    private int m;
 
     
     void Start()
@@ -18,6 +22,30 @@ public class PUN2_RoomController : MonoBehaviourPunCallbacks
             UnityEngine.SceneManagement.SceneManager.LoadScene("GameLobby");
             return;
         }
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            h = PlayerPrefs.GetInt("Hour");
+            m = PlayerPrefs.GetInt("Minute");
+            Debug.Log("Time is " + h + " : " + m);
+            SunRotation.rotation = Quaternion.Euler(360 * (h - 6) / 24 + 15 * m / 60, SunRotation.rotation.eulerAngles.y, SunRotation.rotation.eulerAngles.z);
+        }
+        else
+            photonView.RPC("Ask", RpcTarget.MasterClient);
+    }
+
+    [PunRPC]
+    void Ask()
+    {
+        Debug.Log("We are master client, send rotations for time");
+        photonView.RPC("Rotations", RpcTarget.Others, h, m);
+    }
+
+    [PunRPC]
+    void Rotations(int hi, int mi)
+    {
+        Debug.Log("We are joining, receive time");
+        SunRotation.rotation = Quaternion.Euler(360 * (hi - 6) / 24 + 15 * mi / 60, SunRotation.rotation.eulerAngles.y, SunRotation.rotation.eulerAngles.z);
     }
 
     void Update()

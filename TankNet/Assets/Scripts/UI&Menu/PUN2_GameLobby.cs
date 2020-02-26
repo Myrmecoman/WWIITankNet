@@ -2,12 +2,13 @@
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using TMPro;
+using System;
 
 public class PUN2_GameLobby : MonoBehaviourPunCallbacks
 {
-
     //Our player name
-    string playerName = "Player 1";
+    string playerName = "Player";
     //Users are separated from each other by gameversion (which allows you to make breaking changes).
     string gameVersion = "0.9";
     //The list of created rooms
@@ -17,9 +18,17 @@ public class PUN2_GameLobby : MonoBehaviourPunCallbacks
     Vector2 roomListScroll = Vector2.zero;
     bool joiningRoom = false;
 
+    //Time of day
+    public TMP_InputField hour;
+    public TMP_InputField minute;
+
+
     // Use this for initialization
     void Start()
     {
+        PlayerPrefs.SetInt("Hour", 12);
+        PlayerPrefs.SetInt("Minute", 30);
+
         //This makes sure we can use PhotonNetwork.LoadLevel() on the master client and all clients in the same room sync their level automatically
         PhotonNetwork.AutomaticallySyncScene = true;
 
@@ -29,6 +38,19 @@ public class PUN2_GameLobby : MonoBehaviourPunCallbacks
             PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion = gameVersion;
             // Connect to the photon master-server. We use the settings saved in PhotonServerSettings (a .asset file in this project)
             PhotonNetwork.ConnectUsingSettings();
+        }
+    }
+
+    private void Update()
+    {
+        int hi = 12;
+        int mi = 30;
+        bool h = Int32.TryParse(hour.text, out hi);
+        bool m = Int32.TryParse(minute.text, out mi);
+        if (h && m)
+        {
+            PlayerPrefs.SetInt("Hour", hi % 24);
+            PlayerPrefs.SetInt("Minute", mi % 60);
         }
     }
 

@@ -36,5 +36,9 @@ MonoBehaviour:
   - SendLightStatus
   - UpdateTransform
   - SendBrake
+  - AskRotation
+  - SendRotation
+  - Rotations
+  - Ask
   DisableAutoOpenWizard: 1
   ShowSettings: 0
