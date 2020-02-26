@@ -31,9 +31,7 @@ public class PUN2_RoomController : MonoBehaviourPunCallbacks
             SunRotation.rotation = Quaternion.Euler(360 * (h - 6) / 24 + 15 * m / 60, SunRotation.rotation.eulerAngles.y, SunRotation.rotation.eulerAngles.z);
         }
         else
-        {
             photonView.RPC("Ask", RpcTarget.MasterClient, photonView.ViewID);
-        }
     }
 
     [PunRPC]
