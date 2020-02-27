@@ -4,7 +4,6 @@ using Photon.Pun;
 
 public class PUN2_RoomController : MonoBehaviourPunCallbacks
 {
-    public Transform SunRotation;
     public GameObject playerPrefab;
     public Transform[] spawnPoint;
 
@@ -28,12 +27,13 @@ public class PUN2_RoomController : MonoBehaviourPunCallbacks
             h = PlayerPrefs.GetInt("Hour");
             m = PlayerPrefs.GetInt("Minute");
             Debug.Log("Time is " + h + " : " + m);
-            SunRotation.rotation = Quaternion.Euler(360 * (h - 6) / 24 + 15 * m / 60, SunRotation.rotation.eulerAngles.y, SunRotation.rotation.eulerAngles.z);
+            //SunRotation.rotation = Quaternion.Euler(360 * (h - 6) / 24 + 15 * m / 60, SunRotation.rotation.eulerAngles.y, SunRotation.rotation.eulerAngles.z);
         }
-        else
-            photonView.RPC("Ask", RpcTarget.MasterClient, photonView.ViewID);
+        //else
+            //photonView.RPC("Ask", RpcTarget.MasterClient, photonView.ViewID);
     }
 
+    /*
     [PunRPC]
     void Ask(int id)
     {
@@ -48,6 +48,7 @@ public class PUN2_RoomController : MonoBehaviourPunCallbacks
         if(photonView.ViewID == id)
             SunRotation.rotation = sunrot;
     }
+    */
 
     void Update()
     {
