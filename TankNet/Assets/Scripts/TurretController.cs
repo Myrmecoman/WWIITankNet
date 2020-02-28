@@ -45,6 +45,7 @@ public class TurretController : MonoBehaviourPun
     private Rigidbody vehicleRIGI;
     private float drownCounter = 10;
     private bool isLocked = false;
+    private InputManager im;
 
     Vector3 latestPos;
     Quaternion latestRot;
@@ -59,6 +60,7 @@ public class TurretController : MonoBehaviourPun
 
         if (photonView.IsMine)
         {
+            im = InputManager.instance;
             normalReverb = GameObject.Find("ReverbSoundNormal").GetComponent<AudioReverbZone>();
             scopeReverb = GameObject.Find("ReverbSoundScope").GetComponent<AudioReverbZone>();
             scopeReverb.enabled = false;
@@ -105,12 +107,12 @@ public class TurretController : MonoBehaviourPun
                 }
             }
 
-            if (Input.GetMouseButton(1))
+            if (im.GetKey(KeybindingActions.lock_turret))
                 isLocked = true;
             else
                 isLocked = false;
 
-            if(Input.GetKeyDown(KeyCode.L))
+            if(im.GetKeyDown(KeybindingActions.light))
             {
                 lightL.enabled = !lightL.enabled;
                 lightR.enabled = !lightR.enabled;
@@ -201,7 +203,7 @@ public class TurretController : MonoBehaviourPun
                 }
 
                 // shooting system
-                if(Input.GetKeyDown(KeyCode.R) && !reload && magNb != 10)
+                if(im.GetKeyDown(KeybindingActions.reload) && !reload && magNb != 10)
                 {
                     magNb = 10;
                     ReloadTime = 4;
@@ -224,7 +226,7 @@ public class TurretController : MonoBehaviourPun
                 if (timeBetweenShots > 0)
                     timeBetweenShots -= Time.deltaTime;
 
-                if (Input.GetMouseButton(0) && timeBetweenShots <= 0 && !reload)
+                if (im.GetKey(KeybindingActions.shoot) && timeBetweenShots <= 0 && !reload)
                 {
                     magNb--;
                     timeBetweenShots = 0.2f;

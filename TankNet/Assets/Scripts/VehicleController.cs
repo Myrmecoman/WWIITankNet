@@ -25,12 +25,17 @@ public class VehicleController : MonoBehaviourPun
     private Rigidbody rb;
     private float s;
     private float force;
+    private InputManager im;
 
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        rb.centerOfMass = new Vector3(rb.centerOfMass.x, rb.centerOfMass.y - 1, rb.centerOfMass.z);
+        if (photonView.IsMine)
+        {
+            im = InputManager.instance;
+            rb = GetComponent<Rigidbody>();
+            rb.centerOfMass = new Vector3(rb.centerOfMass.x, rb.centerOfMass.y - 1, rb.centerOfMass.z);
+        }
     }
 
 
@@ -93,7 +98,7 @@ public class VehicleController : MonoBehaviourPun
             GetInput();
             Steer();
             UpdateWheelPoses();
-            if (Input.GetKey(KeyCode.Space) || destroyed || s >= 16)
+            if (im.GetKey(KeybindingActions.brake) || destroyed || s >= 16)
             {
                 frontleft.brakeTorque = 7000;
                 frontright.brakeTorque = 7000;
@@ -122,8 +127,16 @@ public class VehicleController : MonoBehaviourPun
     
     public void GetInput()
     {
-        m_horizontalInput = Input.GetAxis("Horizontal");
-        m_verticalInput = -Input.GetAxis("Vertical");
+        if (im.GetKey(KeybindingActions.forward) || im.GetKey(KeybindingActions.backward))
+        {
+            m_horizontalInput = Input.GetAxis("Horizontal");
+            m_verticalInput = -Input.GetAxis("Vertical");
+        }
+        else
+        {
+            m_horizontalInput = 0;
+            m_verticalInput = 0;
+        }
     }
     
     private void Steer()

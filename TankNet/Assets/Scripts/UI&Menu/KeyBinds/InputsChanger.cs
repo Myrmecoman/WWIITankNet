@@ -2,11 +2,9 @@
 using UnityEngine.UI;
 
 
-public class InputsManager : MonoBehaviour
+public class InputsChanger : MonoBehaviour
 {
-    [HideInInspector]
-    public string nameButton;
-
+    public InputManager binds;
     public Text forwardTxt;
     public Text backwardTxt;
     public Text leftTxt;
@@ -19,6 +17,7 @@ public class InputsManager : MonoBehaviour
     public Text lightTxt;
 
     private bool selected = false;
+    private string nameButton;
 
 
     public void ButtonPressed(string nameB)
