@@ -248,6 +248,7 @@ public class TurretController : MonoBehaviourPun
                     Cursor.visible = true;
                     PhotonNetwork.Destroy(photonView);
                     PhotonNetwork.LeaveRoom();
+                    PhotonNetwork.LoadLevel("GameLobby");
                 }
             }
         }

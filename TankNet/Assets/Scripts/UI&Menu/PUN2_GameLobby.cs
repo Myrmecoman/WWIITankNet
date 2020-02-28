@@ -14,7 +14,7 @@ public class PUN2_GameLobby : MonoBehaviourPunCallbacks
     //The list of created rooms
     List<RoomInfo> createdRooms = new List<RoomInfo>();
     //Use this name when creating a Room
-    string roomName = "Room 1";
+    string roomName = "Room1";
     Vector2 roomListScroll = Vector2.zero;
     bool joiningRoom = false;
 
@@ -39,6 +39,11 @@ public class PUN2_GameLobby : MonoBehaviourPunCallbacks
             // Connect to the photon master-server. We use the settings saved in PhotonServerSettings (a .asset file in this project)
             PhotonNetwork.ConnectUsingSettings();
         }
+
+        if (PhotonNetwork.IsConnected)
+            PhotonNetwork.JoinLobby(TypedLobby.Default);
+        else
+            PhotonNetwork.ConnectUsingSettings();
     }
 
     private void Update()

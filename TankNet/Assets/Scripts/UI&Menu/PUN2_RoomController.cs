@@ -51,7 +51,7 @@ public class PUN2_RoomController : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        if (t < 1.5f)
+        if (t < 1)
             t += Time.deltaTime;
         else if (!spawned)
         {
@@ -67,9 +67,7 @@ public class PUN2_RoomController : MonoBehaviourPunCallbacks
 
         //Leave this Room
         if (GUI.Button(new Rect(5, 5, 125, 25), "Leave Room"))
-        {
             PhotonNetwork.LeaveRoom();
-        }
 
         //Show the Room name
         GUI.Label(new Rect(135, 5, 200, 25), PhotonNetwork.CurrentRoom.Name);
@@ -86,6 +84,6 @@ public class PUN2_RoomController : MonoBehaviourPunCallbacks
     public override void OnLeftRoom()
     {
         //We have left the Room, return back to the GameLobby
-        UnityEngine.SceneManagement.SceneManager.LoadScene("GameLobby");
+        PhotonNetwork.LoadLevel("GameLobby");
     }
 }
