@@ -127,16 +127,19 @@ public class VehicleController : MonoBehaviourPun
     
     public void GetInput()
     {
-        if (im.GetKey(KeybindingActions.forward) || im.GetKey(KeybindingActions.backward))
-        {
-            m_horizontalInput = Input.GetAxis("Horizontal");
-            m_verticalInput = -Input.GetAxis("Vertical");
-        }
+        if (im.GetKey(KeybindingActions.forward))
+            m_verticalInput = -1;
+        else if(im.GetKey(KeybindingActions.backward))
+            m_verticalInput = 1;
         else
-        {
             m_horizontalInput = 0;
-            m_verticalInput = 0;
-        }
+
+        if (im.GetKey(KeybindingActions.left))
+            m_horizontalInput = -1;
+        else if (im.GetKey(KeybindingActions.right))
+            m_horizontalInput = 1;
+        else
+            m_horizontalInput = 0;
     }
     
     private void Steer()
