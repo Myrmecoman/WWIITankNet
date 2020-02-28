@@ -347,7 +347,7 @@ Transform:
   - {fileID: 2141681767}
   - {fileID: 384251822}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &404412794
 GameObject:
@@ -466,6 +466,61 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 473091565}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &498821572
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 498821574}
+  - component: {fileID: 498821573}
+  m_Layer: 0
+  m_Name: ReverbSoundScope
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!167 &498821573
+AudioReverbZone:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498821572}
+  m_Enabled: 0
+  m_MinDistance: 1999
+  m_MaxDistance: 2000
+  m_ReverbPreset: 27
+  m_Room: -1200
+  m_RoomHF: -1200
+  m_DecayTime: 1.49
+  m_DecayHFRatio: 0.1
+  m_Reflections: 1000
+  m_ReflectionsDelay: 0.007
+  m_Reverb: 1700
+  m_ReverbDelay: 0.011
+  m_HFReference: 20000
+  m_Diffusion: 100
+  m_Density: 70
+  m_LFReference: 1000
+  m_RoomLF: -1200
+--- !u!4 &498821574
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498821572}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1000, y: 0, z: 1000}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &582169966
 GameObject:
   m_ObjectHideFlags: 0
@@ -615,7 +670,7 @@ GameObject:
   - component: {fileID: 1281802822}
   - component: {fileID: 1281802821}
   m_Layer: 0
-  m_Name: ReverbSound
+  m_Name: ReverbSoundNormal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -653,7 +708,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1281802820}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 960, y: 21, z: 985}
+  m_LocalPosition: {x: 1000, y: 0, z: 1000}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -745,7 +800,7 @@ Transform:
   - {fileID: 404412795}
   - {fileID: 1300401074}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1444739441
 MonoBehaviour:
@@ -885,8 +940,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1817387391}
-  m_LocalRotation: {x: -0.052452184, y: 0.7867261, z: -0.067377985, w: -0.61136824}
-  m_LocalPosition: {x: 387.3896, y: -144.37128, z: 1303.9979}
+  m_LocalRotation: {x: 0.2412834, y: -0.55256486, z: -0.1706429, w: -0.7793173}
+  m_LocalPosition: {x: -62.976105, y: -436.0182, z: 582.23596}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2141681767}
@@ -974,7 +1029,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3707803085215926894}
   - component: {fileID: 8452293600220775897}
-  - component: {fileID: 5941010141795990636}
   m_Layer: 0
   m_Name: CameraSky
   m_TagString: Untagged
@@ -994,16 +1048,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!81 &5941010141795990636
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1258422894445873278}
-  m_Enabled: 1
 --- !u!114 &7963318210865373222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1780,7 +1826,7 @@ GameObject:
   - component: {fileID: 7963318210865373222}
   - component: {fileID: 8003154381618929801}
   m_Layer: 0
-  m_Name: 'Sky Sphere Preetham [Desktop] '
+  m_Name: Sky_Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2097,7 +2143,7 @@ Transform:
   - {fileID: 8005967377452176060}
   - {fileID: 735289190}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &8016479719114241586
 MeshRenderer:
@@ -2360,7 +2406,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

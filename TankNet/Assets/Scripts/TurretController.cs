@@ -17,6 +17,8 @@ public class TurretController : MonoBehaviourPun
     public Camera Commandercam;
     public Camera GunnerCam;
     public Transform ShellFireTrans;
+    public AudioClip[] shellsClips;
+    public AudioSource[] shellSounds;
     public AudioSource ReloadSound;
     public GameObject Shell;
     public AudioListener MainAudioListen;
@@ -29,6 +31,8 @@ public class TurretController : MonoBehaviourPun
     public Light lightL;
     public Light lightR;
 
+    private AudioReverbZone normalReverb;
+    private AudioReverbZone scopeReverb;
     private bool reload; // say if the tank shot
     private float ReloadTime; // to countdown after a shot
     private int magNb;
@@ -55,6 +59,9 @@ public class TurretController : MonoBehaviourPun
 
         if (photonView.IsMine)
         {
+            normalReverb = GameObject.Find("ReverbSoundNormal").GetComponent<AudioReverbZone>();
+            scopeReverb = GameObject.Find("ReverbSoundScope").GetComponent<AudioReverbZone>();
+            scopeReverb.enabled = false;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             magNb = 10;
@@ -165,6 +172,8 @@ public class TurretController : MonoBehaviourPun
                     {
                         Commandercam.GetComponent<Camera>().enabled = false;
                         GunnerCam.GetComponent<Camera>().enabled = true;
+                        scopeReverb.enabled = true;
+                        normalReverb.enabled = false;
                         SightCanvas.enabled = true;
                         fovLevel = 1;
                     }
@@ -174,6 +183,8 @@ public class TurretController : MonoBehaviourPun
                     {
                         Commandercam.GetComponent<Camera>().enabled = true;
                         GunnerCam.GetComponent<Camera>().enabled = false;
+                        scopeReverb.enabled = false;
+                        normalReverb.enabled = true;
                         SightCanvas.enabled = false;
                         fovLevel = 0;
                     }
@@ -260,6 +271,16 @@ public class TurretController : MonoBehaviourPun
             if (shot)
             {
                 gunAnim.Play("shoot");
+                AudioClip i = shellsClips[Random.Range(0, shellsClips.Length - 1)];
+                for (int u = 0; u < shellSounds.Length; u++)
+                {
+                    if (!shellSounds[u].isPlaying)
+                    {
+                        shellSounds[u].clip = i;
+                        shellSounds[u].Play();
+                        break;
+                    }
+                }
                 photonView.RPC("Shooting", RpcTarget.All, ShellFireTrans.position, ShellFireTrans.rotation);
                 shot = false;
             }
