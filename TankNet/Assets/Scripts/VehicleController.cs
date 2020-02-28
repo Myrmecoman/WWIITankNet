@@ -93,7 +93,7 @@ public class VehicleController : MonoBehaviourPun
             GetInput();
             Steer();
             UpdateWheelPoses();
-            if (Input.GetKey("space") || destroyed || s >= 16)
+            if (Input.GetKey(KeyCode.Space) || destroyed || s >= 16)
             {
                 frontleft.brakeTorque = 7000;
                 frontright.brakeTorque = 7000;
