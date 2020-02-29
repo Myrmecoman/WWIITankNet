@@ -186,7 +186,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: e70baa8c6c64e63468baa9b4d321ad58, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.1
-  m_Pitch: 0.7
+  m_Pitch: 0.8
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -690,7 +690,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: e70baa8c6c64e63468baa9b4d321ad58, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.1
-  m_Pitch: 0.7
+  m_Pitch: 0.8
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -847,7 +847,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: e70baa8c6c64e63468baa9b4d321ad58, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.1
-  m_Pitch: 0.7
+  m_Pitch: 0.8
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -1751,7 +1751,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: e70baa8c6c64e63468baa9b4d321ad58, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.1
-  m_Pitch: 0.7
+  m_Pitch: 0.8
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -1878,7 +1878,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: e70baa8c6c64e63468baa9b4d321ad58, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.1
-  m_Pitch: 0.7
+  m_Pitch: 0.8
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -2788,7 +2788,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

@@ -504,8 +504,8 @@ AudioReverbZone:
   m_ReverbDelay: 0.011
   m_HFReference: 20000
   m_Diffusion: 100
-  m_Density: 70
-  m_LFReference: 1000
+  m_Density: 55
+  m_LFReference: 300
   m_RoomLF: -1200
 --- !u!4 &498821574
 Transform:
@@ -940,8 +940,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1817387391}
-  m_LocalRotation: {x: 0.044265963, y: -0.7884736, z: -0.05671712, w: -0.6108463}
-  m_LocalPosition: {x: -153.33209, y: -70.22162, z: 901.46155}
+  m_LocalRotation: {x: 0.09107425, y: -0.013173867, z: -0.0011190559, w: -0.9957563}
+  m_LocalPosition: {x: -330.48944, y: -330.9276, z: -630.52625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2141681767}
@@ -1270,9 +1270,9 @@ MonoBehaviour:
   m_StarsFieldScintillationSpeed: 0.5
   m_SunPI: 0.3016925
   m_SunTheta: 0.2322352
-  m_SunSize: 0.07
+  m_SunSize: 0.06
   m_SunColor: {r: 1, g: 0.798, b: 0.316, a: 1}
-  m_SunIntensity: 1
+  m_SunIntensity: 5
   m_MoonMeshQuality: 1
   m_MoonPI: -1.3056828
   m_MoonTheta: 2.251541
@@ -2118,7 +2118,7 @@ Transform:
   m_GameObject: {fileID: 8003315602724120124}
   m_LocalRotation: {x: 0.7804672, y: -0.027389314, z: -0.021905782, w: 0.62421227}
   m_LocalPosition: {x: 0.06838698, y: 0.97315437, z: 0.21975839}
-  m_LocalScale: {x: 0.07, y: 0.07, z: 0.07}
+  m_LocalScale: {x: 0.06, y: 0.06, z: 0.06}
   m_Children: []
   m_Father: {fileID: 8006219601955867280}
   m_RootOrder: 2
