@@ -31,6 +31,7 @@ public class TurretController : MonoBehaviourPun
     public Text reloadingTxt;
     public Light lightL;
     public Light lightR;
+    public Canvas PauseUI;
 
     private AudioReverbZone normalReverb;
     private AudioReverbZone scopeReverb;
@@ -46,6 +47,8 @@ public class TurretController : MonoBehaviourPun
     private Rigidbody vehicleRIGI;
     private float drownCounter = 10;
     private bool isLocked = false;
+    private bool isPaused = false;
+    private VehicleController vehicleControl;
     private InputManager im;
 
     Vector3 latestPos;
@@ -58,9 +61,11 @@ public class TurretController : MonoBehaviourPun
         lightL.enabled = false;
         lightR.enabled = false;
         SightCanvas.enabled = false;
+        PauseUI.enabled = false;
 
         if (photonView.IsMine)
         {
+            vehicleControl = gameObject.GetComponent<VehicleController>();
             im = InputManager.instance;
             normalReverb = GameObject.Find("ReverbSoundNormal").GetComponent<AudioReverbZone>();
             scopeReverb = GameObject.Find("ReverbSoundScope").GetComponent<AudioReverbZone>();
@@ -98,13 +103,19 @@ public class TurretController : MonoBehaviourPun
             {
                 if(Cursor.lockState == CursorLockMode.Locked)
                 {
+                    isPaused = true;
+                    vehicleControl.destroyed = true;
                     Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true;
+                    PauseUI.enabled = true;
                 }
                 else
                 {
+                    isPaused = false;
+                    vehicleControl.destroyed = false;
                     Cursor.lockState = CursorLockMode.Locked;
                     Cursor.visible = false;
+                    PauseUI.enabled = false;
                 }
             }
 
@@ -121,7 +132,7 @@ public class TurretController : MonoBehaviourPun
             }
 
             // handle the drowning of the vehicle
-            if (!isDestroyed)
+            if (!isDestroyed && !isPaused)
             {
                 if (vehicle.transform.position.y < 14.3f)
                 {
@@ -242,7 +253,7 @@ public class TurretController : MonoBehaviourPun
                     }
                 }
             }
-            else
+            else if(isDestroyed)
             {
                 destroyTime = destroyTime + Time.deltaTime;
                 if (destroyTime > 5)
@@ -331,7 +342,7 @@ public class TurretController : MonoBehaviourPun
         {
             isDestroyed = true;
             DestroyText.text = "Vehicle destroyed";
-            GetComponent<VehicleController>().destroyed = true;
+            vehicleControl.destroyed = true;
         }
     }
 }
