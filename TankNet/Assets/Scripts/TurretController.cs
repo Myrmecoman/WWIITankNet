@@ -32,6 +32,8 @@ public class TurretController : MonoBehaviourPun
     public Light lightL;
     public Light lightR;
     public Canvas PauseUI;
+    [HideInInspector]
+    public bool isPaused = false;
 
     private AudioReverbZone normalReverb;
     private AudioReverbZone scopeReverb;
@@ -47,7 +49,6 @@ public class TurretController : MonoBehaviourPun
     private Rigidbody vehicleRIGI;
     private float drownCounter = 10;
     private bool isLocked = false;
-    private bool isPaused = false;
     private VehicleController vehicleControl;
     private InputManager im;
 

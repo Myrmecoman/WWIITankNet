@@ -12,6 +12,7 @@ public class PUN2_RoomController : MonoBehaviourPunCallbacks
     private bool spawned = false;
     private int h;
     private int m;
+    private TurretController vehicle;
 
 
     void Start()
@@ -55,29 +56,33 @@ public class PUN2_RoomController : MonoBehaviourPunCallbacks
             t += Time.deltaTime;
         else if (!spawned)
         {
-            PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint[Random.Range(0, spawnPoint.Length - 1)].position, Quaternion.identity, 0);
+            GameObject inst = PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint[Random.Range(0, spawnPoint.Length - 1)].position, Quaternion.identity, 0);
+            vehicle = inst.GetComponent<TurretController>();
             spawned = true;
         }
     }
 
     void OnGUI()
     {
-        if (PhotonNetwork.CurrentRoom == null)
-            return;
-
-        //Leave this Room
-        if (GUI.Button(new Rect(5, 5, 125, 25), "Leave Room"))
-            PhotonNetwork.LeaveRoom();
-
-        //Show the Room name
-        GUI.Label(new Rect(135, 5, 200, 25), PhotonNetwork.CurrentRoom.Name);
-
-        //Show the list of the players connected to this Room
-        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+        if (spawned && vehicle.isPaused)
         {
-            //Show if this player is a Master Client. There can only be one Master Client per Room so use this to define the authoritative logic etc.)
-            string isMasterClient = (PhotonNetwork.PlayerList[i].IsMasterClient ? ": MasterClient" : "");
-            GUI.Label(new Rect(5, 35 + 30 * i, 200, 25), PhotonNetwork.PlayerList[i].NickName + isMasterClient);
+            if (PhotonNetwork.CurrentRoom == null)
+                return;
+
+            //Leave this Room
+            if (GUI.Button(new Rect(5, 5, 125, 25), "Leave Room"))
+                PhotonNetwork.LeaveRoom();
+
+            //Show the Room name
+            GUI.Label(new Rect(135, 5, 200, 25), PhotonNetwork.CurrentRoom.Name);
+
+            //Show the list of the players connected to this Room
+            for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+            {
+                //Show if this player is a Master Client. There can only be one Master Client per Room so use this to define the authoritative logic etc.)
+                string isMasterClient = (PhotonNetwork.PlayerList[i].IsMasterClient ? ": MasterClient" : "");
+                GUI.Label(new Rect(5, 35 + 30 * i, 200, 25), PhotonNetwork.PlayerList[i].NickName + isMasterClient);
+            }
         }
     }
 

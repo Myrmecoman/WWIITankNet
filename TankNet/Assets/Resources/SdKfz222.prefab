@@ -11051,6 +11051,7 @@ MonoBehaviour:
   lightL: {fileID: 7151214845053161262}
   lightR: {fileID: 7586407505139612678}
   PauseUI: {fileID: 1076467864971404605}
+  isPaused: 0
 --- !u!65 &6041444001322634439
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11062,8 +11063,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.6789358, y: 0.92233443, z: 4.1411514}
-  m_Center: {x: 1.0065774, y: 0.5123409, z: 2.5168915}
+  m_Size: {x: 1.6789358, y: 0.8402033, z: 4.0590487}
+  m_Center: {x: 1.0065774, y: 0.47127533, z: 2.5579429}
 --- !u!65 &2753186851101629523
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11075,8 +11076,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.6316996, y: 0.29972005, z: 2.4804182}
-  m_Center: {x: 1.0090075, y: 1.1294223, z: 2.4499497}
+  m_Size: {x: 1.5219362, y: 0.38144088, z: 2.460813}
+  m_Center: {x: 1.0157307, y: 1.0554286, z: 2.4597523}
 --- !u!65 &8018972235454635454
 BoxCollider:
   m_ObjectHideFlags: 0
