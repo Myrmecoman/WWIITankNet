@@ -120,6 +120,84 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &157871140
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 157871141}
+  - component: {fileID: 157871143}
+  - component: {fileID: 157871142}
+  m_Layer: 0
+  m_Name: Moon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &157871141
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157871140}
+  m_LocalRotation: {x: -0.20278858, y: 0.7487889, z: 0.26518795, w: 0.572597}
+  m_LocalPosition: {x: -0.7499544, y: -0.6293718, z: 0.203616}
+  m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
+  m_Children: []
+  m_Father: {fileID: 8006219601955867280}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &157871142
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157871140}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: d75eef145599e094eaad7920f50acf94, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &157871143
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157871140}
+  m_Mesh: {fileID: 4300000, guid: b250b63290f1a6248964185185ad678a, type: 2}
 --- !u!1 &316481126
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,6 +272,84 @@ Transform:
   m_Father: {fileID: 2141681767}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &355871373
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 355871374}
+  - component: {fileID: 355871376}
+  - component: {fileID: 355871375}
+  m_Layer: 0
+  m_Name: MoonVisible
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &355871374
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 355871373}
+  m_LocalRotation: {x: 0.13185719, y: -0.30850264, z: 0.02849194, w: 0.94160926}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2.1, y: 2.1, z: 2.1}
+  m_Children: []
+  m_Father: {fileID: 7999799666893075716}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 15.420001, y: -36.504, z: -1.6470001}
+--- !u!23 &355871375
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 355871373}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: ee1551573dd31834fb193bd5539f7c77, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &355871376
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 355871373}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &384251818
 GameObject:
   m_ObjectHideFlags: 0
@@ -812,8 +968,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1817387391}
-  m_LocalRotation: {x: -0.022924425, y: 0.96696866, z: 0.23513831, w: 0.09568754}
-  m_LocalPosition: {x: 900.455, y: -43.630154, z: 249.75563}
+  m_LocalRotation: {x: 0.2915784, y: 0.4509099, z: 0.15814225, w: -0.82864547}
+  m_LocalPosition: {x: -5193.015, y: 4663.157, z: 2228.8652}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2141681767}
@@ -1139,10 +1295,10 @@ MonoBehaviour:
     transform: {fileID: 7999862628486055510}
     light: {fileID: 7968427669667145858}
   m_Moon:
-    gameObject: {fileID: 8005020745423836524}
-    transform: {fileID: 7999799666893075716}
-    meshFilter: {fileID: 8026457328990189090}
-    meshRenderer: {fileID: 8018159331174568420}
+    gameObject: {fileID: 157871140}
+    transform: {fileID: 157871141}
+    meshFilter: {fileID: 157871143}
+    meshRenderer: {fileID: 157871142}
   m_MoonLight:
     gameObject: {fileID: 8002917109184102278}
     transform: {fileID: 8005983804624333338}
@@ -1252,7 +1408,7 @@ MonoBehaviour:
   m_MoonMeshQuality: 1
   m_MoonPI: -1.3056828
   m_MoonTheta: 2.251541
-  m_MoonSize: 0.035
+  m_MoonSize: 0.02
   m_MoonColor: {r: 1, g: 0.872, b: 0.661, a: 1}
   m_MoonIntensity: 1
   m_SunLightColor: {r: 1, g: 0.84, b: 0.61, a: 1}
@@ -1753,8 +1909,9 @@ Transform:
   m_GameObject: {fileID: 8005020745423836524}
   m_LocalRotation: {x: -0.20278858, y: 0.7487889, z: 0.26518795, w: 0.572597}
   m_LocalPosition: {x: -0.7499544, y: -0.6293718, z: 0.203616}
-  m_LocalScale: {x: 0.035, y: 0.035, z: 0.035}
-  m_Children: []
+  m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
+  m_Children:
+  - {fileID: 355871374}
   m_Father: {fileID: 8006219601955867280}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2118,6 +2275,7 @@ Transform:
   - {fileID: 8005983804624333338}
   - {fileID: 8005967377452176060}
   - {fileID: 735289190}
+  - {fileID: 157871141}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
